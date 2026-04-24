@@ -5,24 +5,34 @@
 package controller;
 
 import entidades.DAO.ClienteDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Cliente;
 
 /**
  *
- * @author henrique
+ * @author roveda
  */
 public class ControlaCliente {
-   
 
     private ClienteDAO cDAO = new ClienteDAO();
 
-    public void salvar(Cliente c) {
-        cDAO.salvar(c);
+    public boolean salvar(Cliente c) {
+        try {
+            cDAO.salvar(c);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao salvar cliente: " + ex.getMessage());
+            return false;
+        }
     }
 
     public ArrayList<Cliente> recuperarTodos() {
-        return cDAO.recuperarTodos();
+        try {
+            return cDAO.recuperarTodos();
+        } catch (SQLException ex) {
+            System.out.println("Erro ao salvar cliente: " + ex.getMessage());
+            return null;
+        }
     }
 }
-   

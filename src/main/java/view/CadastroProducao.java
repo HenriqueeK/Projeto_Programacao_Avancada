@@ -17,7 +17,7 @@ import model.Safra;
  */
 public class CadastroProducao extends javax.swing.JInternalFrame {
     
-    ControlaProducao cp2 = new ControlaProducao();
+    ControlaProducao cp = new ControlaProducao();
     
     public CadastroProducao() {
         initComponents();
@@ -286,7 +286,7 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
 
     
     private void montaTabela() {
-        ArrayList<Producao> tarefas = cp2.recuperarTodos();
+        ArrayList<Producao> tarefas = cp.recuperarTodos();
         if (tarefas == null) {
             System.out.println("Ocorreu um erro ao consultar as tarefas");
         } else {
@@ -394,7 +394,7 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         p.setQuantidade(quantidade);
         p.setPrecoUnitario(preco);
         
-        cp2.salvar(p);
+//        cp2.salvar(p);
         
         nomeProduto.setText("");
         nomeSafra.setText("");
@@ -405,7 +405,7 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_salvarActionPerformed
 
     private void butAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtualizarActionPerformed
-         montaTabela();
+//         montaTabela();
     }//GEN-LAST:event_butAtualizarActionPerformed
 
 

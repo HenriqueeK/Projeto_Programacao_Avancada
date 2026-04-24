@@ -8,6 +8,7 @@ import entidades.DAO.ClienteDAO;
 import entidades.DAO.ProducaoDAO;
 import java.util.ArrayList;
 import model.Cliente;
+import model.Producao;
 
 /**
  *
@@ -15,15 +16,21 @@ import model.Cliente;
  */
 public class ControlaProducao {
    
-
-    private ProducaoDAO pDAO = new ProducaoDAO();
-
-    public void salvar(Cliente c) {
-        pDAO.salvar(p);
+     ArrayList<Producao> ps = new ArrayList<Producao>();
+    
+    public void salvar(Producao p){
+        ps.add(p);
     }
-
-    public ArrayList<Cliente> recuperarTodos() {
-        return pDAO.recuperarTodos();
+    
+    public void imprimirTodos(){
+        for (int i = 0; i < ps.size(); i++) {
+            System.out.println(ps.get(i).getProduto());
+            System.out.println(ps.get(i));
+        }
+    }
+    
+    public ArrayList<Producao> recuperarTodos(){
+        return ps;
     }
 }
    

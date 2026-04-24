@@ -18,6 +18,8 @@ view/CadastroCliente$1.class
 controller/ControlaSafra.class
 view/CadastroTipoCusto.class
 view/TelaPrincipal.class
+apoio/TestaConexao.class
+apoio/ConexaoBD.class
 model/TipoProduto.class
 apoio/FileManager.class
 view/CadastroProducao$1.class

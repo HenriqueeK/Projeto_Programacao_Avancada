@@ -1,41 +1,58 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package entidades.DAO;
 
-import apoio.FileManager;
+import apoio.ConexaoBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Cliente;
 
-
+/**
+ *
+ * @author roveda
+ */
 public class ClienteDAO {
-    
-        
-    private final String caminhoArquivo = "cliente.txt";
 
-    public void salvar(Cliente c) {
-        FileManager.adicionarLinhaNoArquivo(c.toString(), caminhoArquivo);
+    private ResultSet resultadoQ = null; // interface que representa o resultado de uma consulta SQL executada em um banco de dados
+    
+    public void salvar(Cliente c) throws SQLException {
+        String sql = ""
+                + "INSERT INTO cliente (nome, cpf, telefone, endereco) VALUES ("
+                + "'" + c.getNome() + "',"
+                + "'" + c.getCpf() + "',"
+                + "'" + c.getTelefone() + "',"
+                + "'" + c.getEndereco() + "' "
+                + ")";
+
+        System.out.println("sql: " + sql);
+
+        ConexaoBD.executeUpdate(sql);
     }
 
-    public ArrayList<Cliente> recuperarTodos() {
-        ArrayList<String> linhas = FileManager.lerLinhasDoArquivo(caminhoArquivo);
+    public ArrayList<Cliente> recuperarTodos() throws SQLException {
         ArrayList<Cliente> cliente = new ArrayList();
+        
+        String sql = ""
+                + "SELECT * FROM cliente ";
 
-        for (String linha : linhas) {
-            String[] partes = linha.split(";");
-            String nome = partes[0];
-            String cpf = partes[1];
-            String telefone = partes[2];
-            String endereco = partes[3];
+        resultadoQ = ConexaoBD.executeQuery(sql);
 
+        while (resultadoQ.next()) {
             Cliente c = new Cliente();
-            c.setNome(nome);
-            c.setCpf(cpf);
-            c.setTelefone(telefone);
-            c.setEndereco(endereco);
-            
-      
+
+            c.setId(resultadoQ.getInt("id_cliente"));
+            c.setNome(resultadoQ.getString("nome"));
+            c.setCpf(resultadoQ.getString("cpf"));
+            c.setTelefone(resultadoQ.getString("telefone"));
+            c.setEndereco(resultadoQ.getString("endereco"));
+
             cliente.add(c);
         }
 
         return cliente;
     }
-    
+
 }

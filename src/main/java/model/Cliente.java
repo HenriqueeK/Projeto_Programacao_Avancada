@@ -6,6 +6,8 @@ package model;
 
 public class Cliente {
     
+    private int id;
+
     private String nome;
     private String cpf;
     private String telefone;
@@ -46,5 +48,13 @@ public class Cliente {
     public String toString() {
         String retorno = nome + ";" + cpf + ";" + telefone + ";" + endereco;
         return retorno;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
