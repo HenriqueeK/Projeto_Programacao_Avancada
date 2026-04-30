@@ -31,7 +31,6 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
@@ -43,12 +42,10 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         tabelaProducao = new javax.swing.JTable();
         butAtualizar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         txtProduto = new javax.swing.JLabel();
         txtNomeSafra = new javax.swing.JLabel();
         nomeProduto = new javax.swing.JTextField();
         txtDataInicio = new javax.swing.JLabel();
-        dataInicio = new javax.swing.JTextField();
         txtDataFim = new javax.swing.JLabel();
         precoUnitario = new javax.swing.JTextField();
         txtQuantidadeProduzida = new javax.swing.JLabel();
@@ -59,14 +56,14 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         salvar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         nomeSafra = new javax.swing.JTextField();
+        dataFim1 = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
         setClosable(true);
-
-        jLabel8.setText("+ Custo de Produção");
+        setTitle("Cadastro de produção");
 
         jLabel9.setText("Descrição");
 
@@ -83,44 +80,38 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(469, 469, 469)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel8)))
-                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(49, 49, 49))
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField5)
+                            .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(49, 49, 49))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5)
+                        .addGap(44, 44, 44))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel8)
-                .addGap(45, 45, 45)
+                .addGap(47, 47, 47)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addGap(17, 17, 17))
+                .addGap(30, 30, 30))
         );
 
         jTabbedPane1.addTab("Custo", jPanel3);
@@ -145,128 +136,64 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(butAtualizar)
-                .addGap(23, 23, 23))
+                .addGap(16, 16, 16))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(butAtualizar)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tabela de Produções", jPanel4);
 
-        jLabel1.setText("+ Nova Produção");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtProduto.setText("Produto");
+        jPanel1.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 46, -1, -1));
 
         txtNomeSafra.setText("Nome da Safra");
+        jPanel1.add(txtNomeSafra, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 110, -1, 25));
 
         nomeProduto.addActionListener(this::nomeProdutoActionPerformed);
+        jPanel1.add(nomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 69, 549, -1));
 
         txtDataInicio.setText("Data de Inicio");
-
-        dataInicio.addActionListener(this::dataInicioActionPerformed);
+        jPanel1.add(txtDataInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 316, -1, -1));
 
         txtDataFim.setText("Data de Fim");
+        jPanel1.add(txtDataFim, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 316, -1, -1));
+        jPanel1.add(precoUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 275, 549, -1));
 
         txtQuantidadeProduzida.setText("Quantidade Produzida");
+        jPanel1.add(txtQuantidadeProduzida, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 182, -1, -1));
+        jPanel1.add(quantidadeProduzida, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 211, 549, -1));
 
         txtPrecoUnitario.setText("Preço Unitário estimado");
+        jPanel1.add(txtPrecoUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 252, -1, -1));
+        jPanel1.add(dataFim, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 345, 250, -1));
 
         cadastraCusto.setText("Você Deseja Cadastrar um Custo?");
         cadastraCusto.addActionListener(this::cadastraCustoActionPerformed);
+        jPanel1.add(cadastraCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 439, -1, -1));
 
         salvar.setText("Salvar");
         salvar.addActionListener(this::salvarActionPerformed);
+        jPanel1.add(salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 440, -1, -1));
 
         cancelar.setText("Cancelar");
         cancelar.addActionListener(this::cancelarActionPerformed);
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, -1, -1));
 
         nomeSafra.addActionListener(this::nomeSafraActionPerformed);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(521, 521, 521))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPrecoUnitario)
-                    .addComponent(txtNomeSafra)
-                    .addComponent(nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(quantidadeProduzida, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantidadeProduzida)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(precoUnitario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(dataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(txtDataInicio)
-                                    .addGap(216, 216, 216)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDataFim)
-                                .addComponent(dataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(cadastraCusto)
-                            .addGap(131, 131, 131)
-                            .addComponent(cancelar)
-                            .addGap(18, 18, 18)
-                            .addComponent(salvar)))
-                    .addComponent(txtProduto)
-                    .addComponent(nomeSafra, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(txtProduto)
-                .addGap(15, 15, 15)
-                .addComponent(nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNomeSafra, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nomeSafra, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(txtQuantidadeProduzida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(quantidadeProduzida, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtPrecoUnitario)
-                .addGap(11, 11, 11)
-                .addComponent(precoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDataFim)
-                    .addComponent(txtDataInicio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cadastraCusto)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(salvar)
-                        .addComponent(cancelar)))
-                .addGap(1, 1, 1))
-        );
+        jPanel1.add(nomeSafra, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 141, 549, -1));
+        jPanel1.add(dataFim1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 345, 250, -1));
 
         jTabbedPane1.addTab("Produção", jPanel1);
 
@@ -278,8 +205,13 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("Cadastro de Produção");
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -354,59 +286,55 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelarActionPerformed
-
-    private void cadastraCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastraCustoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cadastraCustoActionPerformed
-
-    private void dataInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dataInicioActionPerformed
-
-    private void nomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeProdutoActionPerformed
+    private void butAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtualizarActionPerformed
+//         montaTabela();
+    }//GEN-LAST:event_butAtualizarActionPerformed
 
     private void nomeSafraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeSafraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeSafraActionPerformed
 
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelarActionPerformed
+
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        String txtDataInicio = dataInicio.getText();
+//        String txtDataInicio = dataInicio.getText();
         String txtDataFim = dataFim.getText();
         double quantidade = Double.parseDouble(quantidadeProduzida.getText());
         double preco = Double.parseDouble(precoUnitario.getText());
-        
+
         Produto produto = new Produto();
         produto.setNome(nomeProduto.getText());
-        
+
         Safra safra = new Safra();
         safra.setNome(nomeSafra.getText());
-        
+
         Producao p = new Producao();
-        p.setProduto(produto);        
+        p.setProduto(produto);
         p.setSafra(safra);
-        p.setDataInicio(txtDataInicio);
+//        p.setDataInicio(txtDataInicio);
         p.setDataFim(txtDataFim);
         p.setQuantidade(quantidade);
         p.setPrecoUnitario(preco);
-        
-//        cp2.salvar(p);
-        
+
+        //        cp2.salvar(p);
+
         nomeProduto.setText("");
         nomeSafra.setText("");
         quantidadeProduzida.setText("");
-        precoUnitario.setText("");
-        dataInicio.setText("");
+//        precoUnitario.setText("");
+//        dataInicio.setText("");
         dataFim.setText("");      // TODO add your handling code here:
     }//GEN-LAST:event_salvarActionPerformed
 
-    private void butAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAtualizarActionPerformed
-//         montaTabela();
-    }//GEN-LAST:event_butAtualizarActionPerformed
+    private void cadastraCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastraCustoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastraCustoActionPerformed
+
+    private void nomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeProdutoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -414,12 +342,10 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
     private javax.swing.JButton cadastraCusto;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField dataFim;
-    private javax.swing.JTextField dataInicio;
+    private javax.swing.JTextField dataFim1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

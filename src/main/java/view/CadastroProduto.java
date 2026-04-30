@@ -8,6 +8,7 @@ package view;
 import controller.ControlaProduto;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import model.Cliente;
 import model.Produto;
 
 /**
@@ -21,7 +22,62 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     /** Creates new form CadastroProduto */
     public CadastroProduto() {
         initComponents();
+        montaTabela();
     }
+    
+    
+        private void montaTabela() {
+    ArrayList<Produto> p = cp.recuperarTodos();
+        if (p == null) {
+            System.out.println("Ocorreu um erro ao consultar as tarefas");
+        } else {
+        tblProduto.setModel(new AbstractTableModel() {
+                @Override
+                public String getColumnName(int column) {
+                    switch (column) {
+                        case 0:
+                            return "ID";
+                        case 1:
+                            return "Nome";
+                        case 2:
+                            return "Unidade";
+                        default:
+                            return "";
+                    }
+                }
+
+                @Override
+                public int getColumnCount() {
+                    return 3;
+                }
+
+                @Override
+                public int getRowCount() {
+                    return p.size();
+                }
+
+                @Override
+                public Object getValueAt(int rowIndex, int columnIndex) {
+                    Produto t = p.get(rowIndex);
+
+                    if (t != null) {
+                        switch (columnIndex) {
+                            case 0:
+                                return t.getId();
+                            case 1:
+                                return t.getNome();
+                            case 2:
+                                return t.getUnidade();
+                        }
+
+                    }
+
+                    return "n/d";
+                }
+            });
+        }
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -41,16 +97,16 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        txtNovoProduto = new javax.swing.JLabel();
         txtNomeProduto = new javax.swing.JLabel();
         txtUnidadeMedida = new javax.swing.JLabel();
-        escreverProduto = new javax.swing.JTextField();
-        salvar = new javax.swing.JButton();
+        cxNome = new javax.swing.JTextField();
+        bntSalvar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
-        unidade = new javax.swing.JTextField();
+        cxUnidade = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tabelaProduto = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
         atualizar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,18 +138,21 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jTabbedPane3.addTab("tab1", jScrollPane2);
 
         setClosable(true);
-
-        txtNovoProduto.setText("+ Novo Produto");
+        setTitle("Cadastro de Produto");
 
         txtNomeProduto.setText("Nome do Produto");
 
         txtUnidadeMedida.setText("Unidade de Medida");
 
-        escreverProduto.addActionListener(this::escreverProdutoActionPerformed);
+        cxNome.addActionListener(this::cxNomeActionPerformed);
 
-        salvar.setText("Salvar");
-        salvar.addActionListener(this::salvarActionPerformed);
+        bntSalvar.setBackground(new java.awt.Color(51, 153, 0));
+        bntSalvar.setForeground(new java.awt.Color(0, 0, 0));
+        bntSalvar.setText("Salvar");
+        bntSalvar.addActionListener(this::bntSalvarActionPerformed);
 
+        cancelar.setBackground(new java.awt.Color(255, 0, 0));
+        cancelar.setForeground(new java.awt.Color(0, 0, 0));
         cancelar.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -101,48 +160,46 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(txtNovoProduto))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNomeProduto)
-                            .addComponent(txtUnidadeMedida)
-                            .addComponent(escreverProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
-                            .addComponent(unidade))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNomeProduto)
+                    .addComponent(txtUnidadeMedida)
+                    .addComponent(cxNome, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+                    .addComponent(cxUnidade))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 423, Short.MAX_VALUE)
-                .addComponent(cancelar)
-                .addGap(18, 18, 18)
-                .addComponent(salvar)
-                .addGap(30, 30, 30))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(cancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntSalvar)
+                        .addGap(30, 30, 30))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(txtNovoProduto)
-                .addGap(42, 42, 42)
+                .addGap(56, 56, 56)
                 .addComponent(txtNomeProduto)
                 .addGap(18, 18, 18)
-                .addComponent(escreverProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(txtUnidadeMedida)
                 .addGap(18, 18, 18)
-                .addComponent(unidade, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addComponent(cxUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelar)
-                    .addComponent(salvar))
+                    .addComponent(bntSalvar))
                 .addGap(30, 30, 30))
         );
 
         jTabbedPane1.addTab("Produto", jPanel1);
 
-        tabelaProduto.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -153,7 +210,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(tabelaProduto);
+        jScrollPane4.setViewportView(tblProduto);
 
         atualizar.setText("Atualizar");
         atualizar.addActionListener(this::atualizarActionPerformed);
@@ -162,19 +219,21 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(atualizar)
-                .addGap(34, 34, 34))
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(atualizar))
+                .addGap(17, 17, 17))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(atualizar)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tabela de Produtos", jPanel3);
@@ -187,69 +246,32 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void montaTabela() {
-        ArrayList<Produto> tarefas = cp.recuperarTodos();
-        if (tarefas == null) {
-            System.out.println("Ocorreu um erro ao consultar as tarefas");
-        } else {
-            tabelaProduto.setModel(new AbstractTableModel() {
-                @Override
-                public String getColumnName(int column) {
-                    switch (column) {
-                        case 0:
-                            return "Nome";
-                        case 1:
-                            return "Unidade de Medida";
-                        default:
-                            return "";
-          
-                    }
-                }
-
-                @Override
-                public int getColumnCount() {
-                    return 2;
-                }
-
-                @Override
-                public int getRowCount() {
-                    return tarefas.size();
-                }
-
-                @Override
-                public Object getValueAt(int rowIndex, int columnIndex) {
-                    Produto t = tarefas.get(rowIndex);
-
-                    if (t != null) {
-                        switch (columnIndex) {
-                            case 0:
-                                return t.getNome();
-                            case 1:
-                                return t.getUnidade();
-                        }
-
-                    }
-
-                    return "n/d";
-                }
-            });
-
-        }
-    }
     
-    private void escreverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escreverProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_escreverProdutoActionPerformed
+    private void cxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNomeActionPerformed
+        String nome = cxNome.getText();
+        String unidade = cxUnidade.getText();
 
-    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        String nome = escreverProduto.getText();
-        String tamanho = unidade.getText();
+        Produto p = new Produto();
+        p.setNome(nome);
+        p.setUnidade(unidade);
+
+        cp.salvar(p);
+        
+        cxNome.setText("");
+        cxUnidade.setText("");
+        
+        montaTabela();
+    }//GEN-LAST:event_cxNomeActionPerformed
+
+    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
+        String nome = cxNome.getText();
+        String tamanho = cxUnidade.getText();
         
         Produto p = new Produto();
         p.setNome(nome);
@@ -257,12 +279,12 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         
         cp.salvar(p);
         
-        escreverProduto.setText("");
-        unidade.setText("");
+        cxNome.setText("");
+        cxUnidade.setText("");
         
         
 
-    }//GEN-LAST:event_salvarActionPerformed
+    }//GEN-LAST:event_bntSalvarActionPerformed
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
         montaTabela();
@@ -271,25 +293,25 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizar;
+    private javax.swing.JButton bntSalvar;
     private javax.swing.JButton cancelar;
-    private javax.swing.JTextField escreverProduto;
+    private javax.swing.JTextField cxNome;
+    private javax.swing.JTextField cxUnidade;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JButton salvar;
-    private javax.swing.JTable tabelaProduto;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JLabel txtNomeProduto;
-    private javax.swing.JLabel txtNovoProduto;
     private javax.swing.JLabel txtUnidadeMedida;
-    private javax.swing.JTextField unidade;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -10,6 +10,7 @@ package model;
  */
 public class Produto {
     
+    private int id;
     private String nome;
     private String unidade;
 
@@ -29,6 +30,12 @@ public class Produto {
     public void setUnidade(String unidade) {
         this.unidade = unidade;
     }
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
  
 }

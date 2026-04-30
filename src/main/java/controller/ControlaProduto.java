@@ -1,6 +1,8 @@
 
 package controller;
 
+import entidades.DAO.ProdutoDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Produto;
 
@@ -10,21 +12,25 @@ import model.Produto;
  */
 public class ControlaProduto {
     
-     ArrayList<Produto> ps = new ArrayList<Produto>();
-    
-    public void salvar(Produto p){
-        ps.add(p);
-    }
-    
-    public void imprimirTodos(){
-        for (int i = 0; i < ps.size(); i++) {
-            System.out.println(ps.get(i).getNome());
-//            System.out.println(ps[i]);
+    private ProdutoDAO pDAO = new ProdutoDAO();
+
+    public boolean salvar(Produto p) {
+        try {
+            pDAO.salvar(p);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao salvar cliente: " + ex.getMessage());
+            return false;
         }
     }
-    
-    public ArrayList<Produto> recuperarTodos(){
-        return ps;
+
+    public ArrayList<Produto> recuperarTodos() {
+        try {
+            return pDAO.recuperarTodos();
+        } catch (SQLException ex) {
+            System.out.println("Erro ao salvar produto: " + ex.getMessage());
+            return null;
+        }
     }
     
 }
