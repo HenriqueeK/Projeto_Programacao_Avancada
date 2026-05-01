@@ -26,7 +26,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
     }
     
     
-        private void montaTabela() {
+private void montaTabela() {
     ArrayList<Produto> p = cp.recuperarTodos();
         if (p == null) {
             System.out.println("Ocorreu um erro ao consultar as tarefas");
@@ -107,7 +107,8 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
-        atualizar = new javax.swing.JButton();
+        bntAtualizar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,65 +138,33 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
         jTabbedPane3.addTab("tab1", jScrollPane2);
 
+        setBackground(new java.awt.Color(0, 102, 102));
         setClosable(true);
         setTitle("Cadastro de Produto");
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         txtNomeProduto.setText("Nome do Produto");
+        jPanel1.add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 56, -1, -1));
 
         txtUnidadeMedida.setText("Unidade de Medida");
+        jPanel1.add(txtUnidadeMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 132, -1, -1));
 
         cxNome.addActionListener(this::cxNomeActionPerformed);
+        jPanel1.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 91, 552, -1));
 
         bntSalvar.setBackground(new java.awt.Color(51, 153, 0));
         bntSalvar.setForeground(new java.awt.Color(0, 0, 0));
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(this::bntSalvarActionPerformed);
+        jPanel1.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
 
         cancelar.setBackground(new java.awt.Color(255, 0, 0));
         cancelar.setForeground(new java.awt.Color(0, 0, 0));
         cancelar.setText("Cancelar");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNomeProduto)
-                    .addComponent(txtUnidadeMedida)
-                    .addComponent(cxNome, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
-                    .addComponent(cxUnidade))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(cancelar)
-                        .addGap(18, 18, 18)
-                        .addComponent(bntSalvar)
-                        .addGap(30, 30, 30))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(txtNomeProduto)
-                .addGap(18, 18, 18)
-                .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtUnidadeMedida)
-                .addGap(18, 18, 18)
-                .addComponent(cxUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelar)
-                    .addComponent(bntSalvar))
-                .addGap(30, 30, 30))
-        );
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, -1, -1));
+        jPanel1.add(cxUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 167, 552, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 636, 10));
 
         jTabbedPane1.addTab("Produto", jPanel1);
 
@@ -212,8 +181,10 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(tblProduto);
 
-        atualizar.setText("Atualizar");
-        atualizar.addActionListener(this::atualizarActionPerformed);
+        bntAtualizar.setText("Atualizar");
+        bntAtualizar.addActionListener(this::bntAtualizarActionPerformed);
+
+        jButton1.setText("Excluir");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -221,19 +192,25 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(atualizar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(bntAtualizar)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton1)
+                        .addGap(4, 4, 4)))
                 .addGap(17, 17, 17))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(atualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(53, 53, 53)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntAtualizar)
+                    .addComponent(jButton1))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tabela de Produtos", jPanel3);
@@ -254,6 +231,10 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
     
     private void cxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNomeActionPerformed
+
+    }//GEN-LAST:event_cxNomeActionPerformed
+
+    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         String nome = cxNome.getText();
         String unidade = cxUnidade.getText();
 
@@ -267,36 +248,21 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         cxUnidade.setText("");
         
         montaTabela();
-    }//GEN-LAST:event_cxNomeActionPerformed
-
-    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
-        String nome = cxNome.getText();
-        String tamanho = cxUnidade.getText();
-        
-        Produto p = new Produto();
-        p.setNome(nome);
-        p.setUnidade(tamanho);
-        
-        cp.salvar(p);
-        
-        cxNome.setText("");
-        cxUnidade.setText("");
-        
-        
 
     }//GEN-LAST:event_bntSalvarActionPerformed
 
-    private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
+    private void bntAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtualizarActionPerformed
         montaTabela();
-    }//GEN-LAST:event_atualizarActionPerformed
+    }//GEN-LAST:event_bntAtualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton atualizar;
+    private javax.swing.JButton bntAtualizar;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cxNome;
     private javax.swing.JTextField cxUnidade;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;

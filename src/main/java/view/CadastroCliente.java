@@ -6,6 +6,7 @@ package view;
 
 import controller.ControlaCliente;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import model.Cliente;
 
@@ -40,7 +41,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                         case 1:
                             return "CPF";
                         case 2:
-                            return "Telefône";
+                            return "Telefone";
                         case 3:
                             return "Endereço";
                         default:
@@ -122,6 +123,8 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
+        bntExcluir = new javax.swing.JButton();
+        bntAtualizar = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -202,77 +205,36 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Cadastro de Cliente");
 
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         txtNome.setText("Nome");
+        jPanel4.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 44, -1, -1));
 
         txtCpf.setText("CPF");
+        jPanel4.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 114, -1, -1));
+        jPanel4.add(cxCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 152, 566, -1));
 
         txtTelefone.setText("Telefone");
+        jPanel4.add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 193, -1, -1));
+        jPanel4.add(cxTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 228, 566, -1));
 
         txtEndereco.setText("Endereço");
+        jPanel4.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 269, -1, -1));
+        jPanel4.add(cxEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 304, 566, -1));
 
         bntSalvar.setBackground(new java.awt.Color(51, 153, 0));
         bntSalvar.setForeground(new java.awt.Color(0, 0, 0));
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(this::bntSalvarActionPerformed);
+        jPanel4.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, -1, -1));
+        jPanel4.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 73, 566, -1));
 
         bntCancelar.setBackground(new java.awt.Color(255, 0, 51));
         bntCancelar.setForeground(new java.awt.Color(0, 0, 0));
         bntCancelar.setText("Cancelar");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome)
-                            .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCpf)
-                            .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefone)
-                            .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEndereco))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cxEndereco, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(60, 60, 60))
-            .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bntCancelar)
-                .addGap(28, 28, 28)
-                .addComponent(bntSalvar)
-                .addGap(63, 63, 63))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(txtNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtCpf)
-                .addGap(21, 21, 21)
-                .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtTelefone)
-                .addGap(18, 18, 18)
-                .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtEndereco)
-                .addGap(18, 18, 18)
-                .addComponent(cxEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntCancelar)
-                    .addComponent(bntSalvar))
-                .addGap(34, 34, 34))
-        );
+        jPanel4.add(bntCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
+        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 422, 664, 10));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -300,15 +262,38 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblCliente);
 
+        bntExcluir.setText("Excluir");
+        bntExcluir.addActionListener(this::bntExcluirActionPerformed);
+
+        bntAtualizar.setText("Atualizar");
+        bntAtualizar.addActionListener(this::bntAtualizarActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntAtualizar)
+                        .addGap(27, 27, 27)
+                        .addComponent(bntExcluir))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntAtualizar)
+                    .addComponent(bntExcluir))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         cliente.addTab("Tabela", jPanel3);
@@ -317,7 +302,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+            .addComponent(cliente)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,9 +334,28 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         montaTabela();
     }//GEN-LAST:event_bntSalvarActionPerformed
 
+    private void bntAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtualizarActionPerformed
+        montaTabela();
+    }//GEN-LAST:event_bntAtualizarActionPerformed
+
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+        String idString = String.valueOf(tblCliente.getValueAt(tblCliente.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        boolean retorno = cp.excluir(id);
+        if (retorno) {
+            JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir!");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_bntExcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAtualizar;
     private javax.swing.JButton bntCancelar;
+    private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JTabbedPane cliente;
     private javax.swing.JTextField cxCpf;

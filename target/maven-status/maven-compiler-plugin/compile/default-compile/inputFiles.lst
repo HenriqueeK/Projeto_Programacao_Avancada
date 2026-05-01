@@ -11,6 +11,7 @@
 /home/henrique/NetBeansProjects/ProjetoProgramacaoAvencada/src/main/java/entidades/DAO/ClienteDAO.java
 /home/henrique/NetBeansProjects/ProjetoProgramacaoAvencada/src/main/java/entidades/DAO/ProducaoDAO.java
 /home/henrique/NetBeansProjects/ProjetoProgramacaoAvencada/src/main/java/entidades/DAO/ProdutoDAO.java
+/home/henrique/NetBeansProjects/ProjetoProgramacaoAvencada/src/main/java/entidades/DAO/SafraDAO.java
 /home/henrique/NetBeansProjects/ProjetoProgramacaoAvencada/src/main/java/model/Cliente.java
 /home/henrique/NetBeansProjects/ProjetoProgramacaoAvencada/src/main/java/model/Custo.java
 /home/henrique/NetBeansProjects/ProjetoProgramacaoAvencada/src/main/java/model/Producao.java

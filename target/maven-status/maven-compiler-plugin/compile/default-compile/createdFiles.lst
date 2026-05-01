@@ -3,6 +3,7 @@ com/mycompany/projetoprogramacaoavencada/ProjetoProgramacaoAvencada.class
 entidades/DAO/ProducaoDAO.class
 controller/ControlaCusto.class
 entidades/DAO/ProdutoDAO.class
+view/CadastroSafra$1.class
 view/CadastroProducao.class
 entidades/DAO/ClienteDAO.class
 model/Producao.class
@@ -22,6 +23,7 @@ view/TelaPrincipal.class
 apoio/TestaConexao.class
 apoio/ConexaoBD.class
 model/TipoProduto.class
+entidades/DAO/SafraDAO.class
 apoio/FileManager.class
 view/CadastroProducao$1.class
 view/CadastroProduto$1.class

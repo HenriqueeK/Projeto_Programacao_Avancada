@@ -6,6 +6,8 @@ package model;
 
 public class Safra {
     
+    
+    private int id;
     private String nome;
     private String descricao;
     private String dataInicio;
@@ -43,6 +45,13 @@ public class Safra {
         this.dataFim = dataFim;
     }
     
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     
 }
