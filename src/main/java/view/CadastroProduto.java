@@ -7,6 +7,7 @@ package view;
 
 import controller.ControlaProduto;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import model.Cliente;
 import model.Produto;
@@ -108,7 +109,7 @@ private void montaTabela() {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
         bntAtualizar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        bntExcluir = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,7 +185,8 @@ private void montaTabela() {
         bntAtualizar.setText("Atualizar");
         bntAtualizar.addActionListener(this::bntAtualizarActionPerformed);
 
-        jButton1.setText("Excluir");
+        bntExcluir.setText("Excluir");
+        bntExcluir.addActionListener(this::bntExcluirActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -197,7 +199,7 @@ private void montaTabela() {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(bntAtualizar)
                         .addGap(29, 29, 29)
-                        .addComponent(jButton1)
+                        .addComponent(bntExcluir)
                         .addGap(4, 4, 4)))
                 .addGap(17, 17, 17))
         );
@@ -209,7 +211,7 @@ private void montaTabela() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAtualizar)
-                    .addComponent(jButton1))
+                    .addComponent(bntExcluir))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -255,14 +257,27 @@ private void montaTabela() {
         montaTabela();
     }//GEN-LAST:event_bntAtualizarActionPerformed
 
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+        String idString = String.valueOf(tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        boolean retorno = cp.excluir(id);
+        if (retorno) {
+            JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir!");
+        }       
+    }//GEN-LAST:event_bntExcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAtualizar;
+    private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cxNome;
     private javax.swing.JTextField cxUnidade;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu jPopupMenu1;

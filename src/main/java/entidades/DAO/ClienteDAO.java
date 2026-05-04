@@ -54,5 +54,14 @@ public class ClienteDAO {
 
         return cliente;
     }
+    
+    public void excluir(int id) throws SQLException {
+        String sql = ""
+                + "DELETE FROM cliente WHERE id_cliente = " + id;
+
+        System.out.println("sql: " + sql);
+
+        ConexaoBD.executeUpdate(sql);
+    }
 
 }

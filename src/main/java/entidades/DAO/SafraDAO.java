@@ -55,4 +55,12 @@ public class SafraDAO {
         return safra;
     }
     
+    public void excluir(int id) throws SQLException {
+        String sql = ""
+                + "DELETE FROM safra WHERE id_safra = " + id;
+
+        System.out.println("sql: " + sql);
+
+        ConexaoBD.executeUpdate(sql);
+    }
 }

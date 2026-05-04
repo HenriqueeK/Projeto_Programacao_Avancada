@@ -51,4 +51,13 @@ public class ProdutoDAO {
         return produto;
     }
     
+        public void excluir(int id) throws SQLException {
+        String sql = ""
+                + "DELETE FROM produto WHERE id_produto = " + id;
+
+        System.out.println("sql: " + sql);
+
+        ConexaoBD.executeUpdate(sql);
+    }
+    
 }

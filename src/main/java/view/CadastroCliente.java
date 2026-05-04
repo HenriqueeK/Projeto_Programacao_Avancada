@@ -37,12 +37,14 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                 public String getColumnName(int column) {
                     switch (column) {
                         case 0:
-                            return "Nome";
+                            return "iD";
                         case 1:
-                            return "CPF";
+                            return "Nome";
                         case 2:
-                            return "Telefone";
+                            return "CPF";
                         case 3:
+                            return "Telefone";
+                        case 4:
                             return "Endereço";
                         default:
                             return "";
@@ -66,12 +68,14 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                     if (t != null) {
                         switch (columnIndex) {
                             case 0:
-                                return t.getNome();
+                                return t.getId();
                             case 1:
-                                return t.getCpf();
+                                return t.getNome();
                             case 2:
-                                return t.getTelefone();
+                                return t.getCpf();
                             case 3:
+                                return t.getTelefone();
+                            case 4:
                                 return t.getEndereco();
                         }
 
@@ -342,7 +346,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         String idString = String.valueOf(tblCliente.getValueAt(tblCliente.getSelectedRow(), 0));
         int id = Integer.parseInt(idString);
 
-        boolean retorno = cp.excluir(id);
+        boolean retorno = cc.excluir(id);
         if (retorno) {
             JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
             montaTabela();

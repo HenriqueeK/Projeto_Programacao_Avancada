@@ -33,4 +33,14 @@ public class ControlaProduto {
         }
     }
     
+    public boolean excluir(int id){
+        try {
+           pDAO.excluir(id);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao excluir Produto: " + ex.getMessage());
+            return false;
+        }
+    } 
+    
 }

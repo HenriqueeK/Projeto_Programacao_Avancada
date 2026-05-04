@@ -6,6 +6,7 @@ package view;
 
 import controller.ControlaSafra;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import model.Safra;
 
@@ -113,7 +114,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSafra = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        bntExcluir = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -165,7 +166,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addComponent(jLabel3)
                         .addComponent(jLabel2)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,29 +212,33 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         jButton3.setText("Atualizar");
         jButton3.addActionListener(this::jButton3ActionPerformed);
 
-        jButton4.setText("Excluir");
+        bntExcluir.setText("Excluir");
+        bntExcluir.addActionListener(this::bntExcluirActionPerformed);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(469, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(bntExcluir)
                 .addGap(20, 20, 20))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntExcluir)
+                    .addComponent(jButton3))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -295,8 +300,22 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         montaTabela();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+        String idString = String.valueOf(tblSafra.getValueAt(tblSafra.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        boolean retorno = cs.excluir(id);
+        if (retorno) {
+            JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir!");
+        }         // TODO add your handling code here:
+    }//GEN-LAST:event_bntExcluirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntExcluir;
     private javax.swing.JTextField cxDataFim;
     private javax.swing.JTextField cxDataInicio;
     private javax.swing.JTextField cxDescricao;
@@ -304,7 +323,6 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

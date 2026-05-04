@@ -36,4 +36,14 @@ public class ControlaSafra {
         }
     }
     
+    public boolean excluir(int id){
+        try {
+            sDAO.excluir(id);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao excluir safra: " + ex.getMessage());
+            return false;
+        }
+    } 
+    
 }
