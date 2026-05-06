@@ -335,6 +335,22 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cxTelefone.setText("");
         cxEndereco.setText("");
         
+        boolean retorno = cc.salvar(c);
+
+        
+        if (retorno) {
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            cxNome.setText("");
+            cxCpf.setText("");
+            cxTelefone.setText("");
+            cxEndereco.setText("");
+
+            cxNome.requestFocus();
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
+        }
+        
         montaTabela();
     }//GEN-LAST:event_bntSalvarActionPerformed
 

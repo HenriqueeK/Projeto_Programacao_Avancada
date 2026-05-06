@@ -248,6 +248,18 @@ private void montaTabela() {
         
         cxNome.setText("");
         cxUnidade.setText("");
+        boolean retorno = cp.salvar(p);
+
+        
+        if (retorno) {
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            cxNome.setText("");
+            cxUnidade.setText("");
+            cxNome.requestFocus();
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
+        }
         
         montaTabela();
 

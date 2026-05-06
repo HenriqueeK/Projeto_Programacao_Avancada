@@ -293,6 +293,21 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         cxDataInicio.setText("");
         cxDataFim.setText("");
         
+        boolean retorno = cs.salvar(s);
+        
+        if (retorno) {
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            cxNome.setText("");
+            cxDescricao.setText("");
+            cxDataInicio.setText("");
+            cxDataFim.setText("");
+            cxNome.requestFocus();
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
+        }
+        
+     
         montaTabela();
     }//GEN-LAST:event_jButton1ActionPerformed
 
