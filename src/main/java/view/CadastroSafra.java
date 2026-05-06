@@ -135,7 +135,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
 
         cxDataInicio.addActionListener(this::cxDataInicioActionPerformed);
 
-        jLabel5.setText("Data de fim");
+        jLabel5.setText("Data de fim (extimativa)");
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(this::jButton1ActionPerformed);
@@ -285,8 +285,6 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         s.setDescricao(descricao);
         s.setDataInicio(dataInicio);
         s.setDataFim(dataFim);
-
-        cs.salvar(s);
         
         cxNome.setText("");
         cxDescricao.setText("");

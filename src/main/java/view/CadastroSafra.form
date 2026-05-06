@@ -148,7 +148,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data de fim"/>
+                <Property name="text" type="java.lang.String" value="Data de fim (extimativa)"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">

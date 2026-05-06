@@ -9,7 +9,6 @@ import controller.ControlaProduto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
-import model.Cliente;
 import model.Produto;
 
 /**
@@ -148,21 +147,18 @@ private void montaTabela() {
         txtNomeProduto.setText("Nome do Produto");
         jPanel1.add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 56, -1, -1));
 
-        txtUnidadeMedida.setText("Unidade de Medida");
+        txtUnidadeMedida.setText("Unidade de Medida (Kg, caixa, unidade, etc)");
         jPanel1.add(txtUnidadeMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 132, -1, -1));
 
         cxNome.addActionListener(this::cxNomeActionPerformed);
         jPanel1.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 91, 552, -1));
 
-        bntSalvar.setBackground(new java.awt.Color(51, 153, 0));
-        bntSalvar.setForeground(new java.awt.Color(0, 0, 0));
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(this::bntSalvarActionPerformed);
         jPanel1.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
 
-        cancelar.setBackground(new java.awt.Color(255, 0, 0));
-        cancelar.setForeground(new java.awt.Color(0, 0, 0));
         cancelar.setText("Cancelar");
+        cancelar.addActionListener(this::cancelarActionPerformed);
         jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, -1, -1));
         jPanel1.add(cxUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 167, 552, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 636, 10));
@@ -243,8 +239,6 @@ private void montaTabela() {
         Produto p = new Produto();
         p.setNome(nome);
         p.setUnidade(unidade);
-
-        cp.salvar(p);
         
         cxNome.setText("");
         cxUnidade.setText("");
@@ -281,6 +275,10 @@ private void montaTabela() {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir!");
         }       
     }//GEN-LAST:event_bntExcluirActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

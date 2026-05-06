@@ -110,6 +110,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jTextField8 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jMenuItem1 = new javax.swing.JMenuItem();
+        scrollPane1 = new java.awt.ScrollPane();
         cliente = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -215,7 +216,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         txtNome.setText("Nome");
         jPanel4.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 44, -1, -1));
 
-        txtCpf.setText("CPF");
+        txtCpf.setText("CPF (Sómente números)");
         jPanel4.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 114, -1, -1));
         jPanel4.add(cxCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 152, 566, -1));
 
@@ -227,15 +228,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jPanel4.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 269, -1, -1));
         jPanel4.add(cxEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 304, 566, -1));
 
-        bntSalvar.setBackground(new java.awt.Color(51, 153, 0));
-        bntSalvar.setForeground(new java.awt.Color(0, 0, 0));
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(this::bntSalvarActionPerformed);
         jPanel4.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, -1, -1));
         jPanel4.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 73, 566, -1));
 
-        bntCancelar.setBackground(new java.awt.Color(255, 0, 51));
-        bntCancelar.setForeground(new java.awt.Color(0, 0, 0));
         bntCancelar.setText("Cancelar");
         jPanel4.add(bntCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 422, 664, 10));
@@ -327,9 +324,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         c.setCpf(cpf);
         c.setTelefone(telefone);
         c.setEndereco(endereco);
-        
-        cc.salvar(c);
-        
+                
         cxNome.setText("");
         cxCpf.setText("");
         cxTelefone.setText("");
@@ -401,6 +396,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private java.awt.ScrollPane scrollPane1;
     private javax.swing.JTable tblCliente;
     private javax.swing.JLabel txtCpf;
     private javax.swing.JLabel txtEndereco;
