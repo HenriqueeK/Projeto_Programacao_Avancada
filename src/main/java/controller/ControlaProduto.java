@@ -19,7 +19,7 @@ public class ControlaProduto {
             pDAO.salvar(p);
             return true;
         } catch (SQLException ex) {
-            System.out.println("Erro ao salvar cliente: " + ex.getMessage());
+            System.out.println("Erro ao salvar Produto: " + ex.getMessage());
             return false;
         }
     }
@@ -28,7 +28,7 @@ public class ControlaProduto {
         try {
             return pDAO.recuperarTodos();
         } catch (SQLException ex) {
-            System.out.println("Erro ao salvar produto: " + ex.getMessage());
+            System.out.println("Erro ao salvar Produto: " + ex.getMessage());
             return null;
         }
     }

@@ -41,7 +41,7 @@ public class ControlaCliente {
             cDAO.excluir(id);
             return true;
         } catch (SQLException ex) {
-            System.out.println("Erro ao excluir Produto: " + ex.getMessage());
+            System.out.println("Erro ao excluir Cliente: " + ex.getMessage());
             return false;
         }
     }   

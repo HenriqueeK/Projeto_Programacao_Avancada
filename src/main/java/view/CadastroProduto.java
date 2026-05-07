@@ -256,7 +256,7 @@ private void montaTabela() {
             cxNome.requestFocus();
             montaTabela();
         } else {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs do sistema.");
         }
         
         montaTabela();
