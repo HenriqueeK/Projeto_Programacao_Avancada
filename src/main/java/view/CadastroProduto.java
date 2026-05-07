@@ -104,6 +104,7 @@ private void montaTabela() {
         cancelar = new javax.swing.JButton();
         cxUnidade = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        txtObrigatorio = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
@@ -144,10 +145,10 @@ private void montaTabela() {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtNomeProduto.setText("Nome do Produto");
+        txtNomeProduto.setText("Nome do Produto *");
         jPanel1.add(txtNomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 56, -1, -1));
 
-        txtUnidadeMedida.setText("Unidade de Medida (Kg, caixa, unidade, etc)");
+        txtUnidadeMedida.setText("Unidade de Medida (Kg, caixa, unidade, etc) *");
         jPanel1.add(txtUnidadeMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 132, -1, -1));
 
         cxNome.addActionListener(this::cxNomeActionPerformed);
@@ -162,6 +163,9 @@ private void montaTabela() {
         jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, -1, -1));
         jPanel1.add(cxUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 167, 552, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 636, 10));
+
+        txtObrigatorio.setText("(*) Itens Obrigatórios");
+        jPanel1.add(txtObrigatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, -1));
 
         jTabbedPane1.addTab("Produto", jPanel1);
 
@@ -302,6 +306,7 @@ private void montaTabela() {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable tblProduto;
     private javax.swing.JLabel txtNomeProduto;
+    private javax.swing.JLabel txtObrigatorio;
     private javax.swing.JLabel txtUnidadeMedida;
     // End of variables declaration//GEN-END:variables
 

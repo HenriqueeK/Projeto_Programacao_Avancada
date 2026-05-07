@@ -53,7 +53,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
                 @Override
                 public int getColumnCount() {
-                    return 4;
+                    return 5;
                 }
 
                 @Override
@@ -111,6 +111,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jMenuItem1 = new javax.swing.JMenuItem();
         scrollPane1 = new java.awt.ScrollPane();
+        jDialog1 = new javax.swing.JDialog();
         cliente = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -125,6 +126,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cxNome = new javax.swing.JTextField();
         bntCancelar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        txtObrigatorio = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
@@ -206,6 +208,17 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         jMenuItem1.setText("jMenuItem1");
 
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setBackground(new java.awt.Color(0, 153, 153));
         setClosable(true);
         setTitle("Cadastro de Cliente");
@@ -213,18 +226,18 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtNome.setText("Nome");
+        txtNome.setText("Nome *");
         jPanel4.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 44, -1, -1));
 
-        txtCpf.setText("CPF (Sómente números)");
+        txtCpf.setText("CPF (Sómente números) *");
         jPanel4.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 114, -1, -1));
         jPanel4.add(cxCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 152, 566, -1));
 
-        txtTelefone.setText("Telefone");
+        txtTelefone.setText("Telefone *");
         jPanel4.add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 193, -1, -1));
         jPanel4.add(cxTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 228, 566, -1));
 
-        txtEndereco.setText("Endereço");
+        txtEndereco.setText("Endereço *");
         jPanel4.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 269, -1, -1));
         jPanel4.add(cxEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 304, 566, -1));
 
@@ -236,6 +249,9 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         bntCancelar.setText("Cancelar");
         jPanel4.add(bntCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 422, 664, 10));
+
+        txtObrigatorio.setText("(*) Itens Obrigatórios");
+        jPanel4.add(txtObrigatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -379,6 +395,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField cxTelefone;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -401,6 +418,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtCpf;
     private javax.swing.JLabel txtEndereco;
     private javax.swing.JLabel txtNome;
+    private javax.swing.JLabel txtObrigatorio;
     private javax.swing.JLabel txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
