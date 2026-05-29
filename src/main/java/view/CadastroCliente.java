@@ -17,6 +17,7 @@ import model.Cliente;
 public class CadastroCliente extends javax.swing.JInternalFrame {
     
     ControlaCliente cc = new ControlaCliente();
+    int codigo = 0;
 
     /**
      * Creates new form CadastroCliente
@@ -132,6 +133,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         tblCliente = new javax.swing.JTable();
         bntExcluir = new javax.swing.JButton();
         bntAtualizar = new javax.swing.JButton();
+        bntEditar = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -285,20 +287,23 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         bntAtualizar.setText("Atualizar");
         bntAtualizar.addActionListener(this::bntAtualizarActionPerformed);
 
+        bntEditar.setText("Editar");
+        bntEditar.addActionListener(this::bntEditarActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bntAtualizar)
-                        .addGap(27, 27, 27)
-                        .addComponent(bntExcluir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(bntEditar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -309,7 +314,8 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAtualizar)
-                    .addComponent(bntExcluir))
+                    .addComponent(bntExcluir)
+                    .addComponent(bntEditar))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -346,11 +352,24 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cxTelefone.setText("");
         cxEndereco.setText("");
         
-        boolean retorno = cc.salvar(c);
-
+        boolean retorno = false;
+        
+        if (codigo == 0) {
+            retorno = cc.salvar(c);
+        } else {
+            c.setId(codigo);
+            retorno = cc.editar(c);
+        }
         
         if (retorno) {
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            
+            if (codigo == 0) {
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            } else {
+                codigo = 0;
+                JOptionPane.showMessageDialog(null, "Editado com sucesso");
+            }
+            
             cxNome.setText("");
             cxCpf.setText("");
             cxTelefone.setText("");
@@ -382,10 +401,29 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_bntExcluirActionPerformed
 
+    private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
+        String idString = String.valueOf(tblCliente.getValueAt(tblCliente.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        Cliente c = cc.recuperarUm(id);
+        if (c != null) {
+            codigo = c.getId();
+
+            cxNome.setText(c.getNome());
+            cxCpf.setText(c.getCpf());
+            cxTelefone.setText(c.getTelefone());
+            cxEndereco.setText(c.getEndereco());
+
+            cliente.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao editar!");
+        }
+    }//GEN-LAST:event_bntEditarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAtualizar;
     private javax.swing.JButton bntCancelar;
+    private javax.swing.JButton bntEditar;
     private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JTabbedPane cliente;

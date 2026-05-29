@@ -51,7 +51,7 @@ public class ProdutoDAO {
         return produto;
     }
     
-        public void excluir(int id) throws SQLException {
+    public void excluir(int id) throws SQLException {
         String sql = ""
                 + "DELETE FROM produto WHERE id_produto = " + id;
 
@@ -60,4 +60,36 @@ public class ProdutoDAO {
         ConexaoBD.executeUpdate(sql);
     }
     
+    public Produto recuperarUm(int id) throws SQLException {
+
+        String sql = ""
+                + "SELECT * FROM produto WHERE id_produto = " + id;
+
+        resultadoQ = ConexaoBD.executeQuery(sql);
+
+        if (resultadoQ.next()) {
+            Produto p = new Produto();
+
+            p.setId(resultadoQ.getInt("id_produto"));
+            p.setNome(resultadoQ.getString("nome"));
+            p.setUnidade(resultadoQ.getString("unidade"));
+
+            return p;
+        }
+
+        return null;
+    }
+    
+    
+    public void editar(Produto p) throws SQLException {
+        String sql = ""
+                + "UPDATE produto SET "
+                + "nome = '" + p.getNome() + "',"
+                + "unidade = '" + p.getUnidade() + "',"
+                + "WHERE id_produto = " + p.getId();
+
+        System.out.println("sql: " + sql);
+
+        ConexaoBD.executeUpdate(sql);
+    }
 }

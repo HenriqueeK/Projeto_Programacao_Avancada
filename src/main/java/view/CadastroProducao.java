@@ -181,15 +181,15 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
 
         cadastraCusto.setText("Você Deseja Cadastrar um Custo?");
         cadastraCusto.addActionListener(this::cadastraCustoActionPerformed);
-        jPanel1.add(cadastraCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 439, -1, -1));
+        jPanel1.add(cadastraCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, -1, -1));
 
         salvar.setText("Salvar");
         salvar.addActionListener(this::salvarActionPerformed);
-        jPanel1.add(salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 440, -1, -1));
+        jPanel1.add(salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, -1, -1));
 
         cancelar.setText("Cancelar");
         cancelar.addActionListener(this::cancelarActionPerformed);
-        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, -1, -1));
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, -1, -1));
 
         nomeSafra.addActionListener(this::nomeSafraActionPerformed);
         jPanel1.add(nomeSafra, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 141, 549, -1));
@@ -205,9 +205,7 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         getAccessibleContext().setAccessibleName("Cadastro de Produção");

@@ -49,10 +49,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="jTabbedPane1" min="-2" pref="522" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jTabbedPane1" min="-2" pref="522" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -325,7 +322,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="66" y="439" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="70" y="430" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -338,7 +335,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="540" y="440" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="540" y="430" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -351,7 +348,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="430" y="440" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="430" y="430" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

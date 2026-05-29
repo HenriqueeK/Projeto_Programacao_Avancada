@@ -26,12 +26,31 @@ public class ControlaCliente {
             return false;
         }
     }
+    
+    public boolean editar(Cliente c) {
+        try {
+            cDAO.editar(c);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao editar: " + ex.getMessage());
+            return false;
+        }
+    }
 
     public ArrayList<Cliente> recuperarTodos() {
         try {
             return cDAO.recuperarTodos();
         } catch (SQLException ex) {
             System.out.println("Erro ao salvar cliente: " + ex.getMessage());
+            return null;
+        }
+    }
+    
+    public Cliente recuperarUm(int id){
+        try {
+            return cDAO.recuperarUm(id);
+        } catch (SQLException ex) {
+            System.out.println("Erro ao recuperar Cliente: " + ex.getMessage());
             return null;
         }
     }

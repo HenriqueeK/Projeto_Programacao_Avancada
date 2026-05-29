@@ -31,6 +31,20 @@ public class ClienteDAO {
 
         ConexaoBD.executeUpdate(sql);
     }
+    
+    public void editar(Cliente c) throws SQLException {
+        String sql = ""
+                + "UPDATE cliente SET "
+                + "nome = '" + c.getNome() + "',"
+                + "cpf= '" + c.getCpf() + "',"
+                + "telefone = '" + c.getTelefone() + "',"
+                + "endereco = '" + c.getEndereco() + "' "
+                + "WHERE id_cliente = " + c.getId();
+
+        System.out.println("sql: " + sql);
+
+        ConexaoBD.executeUpdate(sql);
+    }
 
     public ArrayList<Cliente> recuperarTodos() throws SQLException {
         ArrayList<Cliente> cliente = new ArrayList();
@@ -54,6 +68,30 @@ public class ClienteDAO {
 
         return cliente;
     }
+    
+    
+    public Cliente recuperarUm(int id) throws SQLException {
+
+        String sql = ""
+                + "SELECT * FROM cliente WHERE id_cliente = " + id;
+
+        resultadoQ = ConexaoBD.executeQuery(sql);
+
+        if (resultadoQ.next()) {
+            Cliente c = new Cliente();
+
+            c.setId(resultadoQ.getInt("id_cliente"));
+            c.setNome(resultadoQ.getString("nome"));
+            c.setCpf(resultadoQ.getString("cpf"));
+            c.setTelefone(resultadoQ.getString("telefone"));
+            c.setEndereco(resultadoQ.getString("endereco"));
+
+            return c;
+        }
+
+        return null;
+    }
+
     
     public void excluir(int id) throws SQLException {
         String sql = ""

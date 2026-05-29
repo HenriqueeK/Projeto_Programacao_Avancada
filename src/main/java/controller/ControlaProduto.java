@@ -43,4 +43,23 @@ public class ControlaProduto {
         }
     } 
     
+    public Produto recuperarUm(int id){
+        try {
+            return pDAO.recuperarUm(id);
+        } catch (SQLException ex) {
+            System.out.println("Erro ao recuperar produto: " + ex.getMessage());
+            return null;
+        }
+    }
+    
+    public boolean editar(Produto p) {
+        try {
+            pDAO.editar(p);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao editar: " + ex.getMessage());
+            return false;
+        }
+    }
+    
 }

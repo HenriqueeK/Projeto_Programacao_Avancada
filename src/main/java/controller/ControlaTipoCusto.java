@@ -4,51 +4,51 @@
  */
 package controller;
 
-import entidades.DAO.SafraDAO;
+import entidades.DAO.TipoCustoDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Safra;
+import model.TipoCusto;
 
 /**
  *
  * @author henrique
  */
-public class ControlaSafra {
+public class ControlaTipoCusto {
     
-    private SafraDAO sDAO = new SafraDAO();
+    private TipoCustoDAO tDAO = new TipoCustoDAO();
 
-    public boolean salvar(Safra s) {
+    public boolean salvar(TipoCusto t) {
         try {
-            sDAO.salvar(s);
+            tDAO.salvar(t);
             return true;
         } catch (SQLException ex) {
-            System.out.println("Erro ao salvar safra: " + ex.getMessage());
+            System.out.println("Erro ao salvar o Tipo de Produto: " + ex.getMessage());
             return false;
         }
     }
 
-    public ArrayList<Safra> recuperarTodos() {
+    public ArrayList<TipoCusto> recuperarTodos() {
         try {
-            return sDAO.recuperarTodos();
+            return tDAO.recuperarTodos();
         } catch (SQLException ex) {
-            System.out.println("Erro ao salvar safra: " + ex.getMessage());
+            System.out.println("Erro ao salvar o Tipo de Produto: " + ex.getMessage());
             return null;
         }
     }
     
     public boolean excluir(int id){
         try {
-            sDAO.excluir(id);
+            tDAO.excluir(id);
             return true;
         } catch (SQLException ex) {
-            System.out.println("Erro ao excluir safra: " + ex.getMessage());
+            System.out.println("Erro ao excluir o Tipo de Produto: " + ex.getMessage());
             return false;
         }
     }
     
-    public boolean editar(Safra s) {
+    public boolean editar(TipoCusto t) {
         try {
-            sDAO.editar(s);
+            tDAO.editar(t);
             return true;
         } catch (SQLException ex) {
             System.out.println("Erro ao editar: " + ex.getMessage());
@@ -56,11 +56,11 @@ public class ControlaSafra {
         }
     }
     
-    public Safra recuperarUm(int id){
+    public TipoCusto recuperarUm(int id){
         try {
-            return sDAO.recuperarUm(id);
+            return tDAO.recuperarUm(id);
         } catch (SQLException ex) {
-            System.out.println("Erro ao recuperar safra: " + ex.getMessage());
+            System.out.println("Erro ao recuperar o Tipo de Produto: " + ex.getMessage());
             return null;
         }
     }

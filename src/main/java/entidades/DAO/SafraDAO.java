@@ -31,6 +31,20 @@ public class SafraDAO {
 
         ConexaoBD.executeUpdate(sql);
     }
+    
+    public void editar(Safra s) throws SQLException {
+        String sql = ""
+                + "UPDATE safra SET "
+                + "nome = '" + s.getNome() + "',"
+                + "descricao = '" + s.getDescricao() + "',"
+                + "data_inicio = '" + s.getDataInicio() + "',"
+                + "data_fim = '" + s.getDataFim() + "' "
+                + "WHERE id_safra = " + s.getId();
+
+        System.out.println("sql: " + sql);
+
+        ConexaoBD.executeUpdate(sql);
+    }
 
     public ArrayList<Safra> recuperarTodos() throws SQLException {
         ArrayList<Safra> safra = new ArrayList();
@@ -62,5 +76,27 @@ public class SafraDAO {
         System.out.println("sql: " + sql);
 
         ConexaoBD.executeUpdate(sql);
+    }
+    
+    public Safra recuperarUm(int id) throws SQLException {
+
+        String sql = ""
+                + "SELECT * FROM safra WHERE id_safra = " + id;
+
+        resultadoQ = ConexaoBD.executeQuery(sql);
+
+        if (resultadoQ.next()) {
+            Safra s = new Safra();
+
+            s.setId(resultadoQ.getInt("id_safra"));
+            s.setNome(resultadoQ.getString("safra"));
+            s.setDescricao(resultadoQ.getString("descricao"));
+            s.setDataInicio(resultadoQ.getString("data_inicio"));
+            s.setDataFim(resultadoQ.getString("data_fim"));
+
+            return s;
+        }
+
+        return null;
     }
 }
