@@ -18,6 +18,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
     
     
     ControlaSafra cs = new ControlaSafra();
+    int codigo = 0;    
 ;
     /**ã
      * Creates new form CadastroSafra
@@ -25,6 +26,8 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
     public CadastroSafra() {
         initComponents();
         montaTabela();
+        
+
     }
     
     private void montaTabela() {
@@ -98,7 +101,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
 
         jTextField3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabela = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         cxNome = new javax.swing.JTextField();
@@ -117,6 +120,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         tblSafra = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         bntExcluir = new javax.swing.JButton();
+        bntEditar = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -206,7 +210,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27))
         );
 
-        jTabbedPane1.addTab("Safra", jPanel1);
+        tabela.addTab("Safra", jPanel1);
 
         tblSafra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,20 +231,26 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         bntExcluir.setText("Excluir");
         bntExcluir.addActionListener(this::bntExcluirActionPerformed);
 
+        bntEditar.setText("Editar");
+        bntEditar.addActionListener(this::bntEditarActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(18, 18, 18)
-                .addComponent(bntExcluir)
-                .addGap(47, 47, 47))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(bntExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(bntEditar)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,21 +260,22 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntExcluir)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(bntEditar))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tabela de Safras", jPanel3);
+        tabela.addTab("Tabela de Safras", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabela)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabela)
         );
 
         pack();
@@ -338,8 +349,29 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         }         // TODO add your handling code here:
     }//GEN-LAST:event_bntExcluirActionPerformed
 
+    private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
+        String idString = String.valueOf(tblSafra.getValueAt(tblSafra.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        Safra s = cs.recuperarUm(id);
+        if (s != null) {
+            codigo = s.getId();
+
+            cxNome.setText(s.getNome());
+            cxDescricao.setText(s.getDescricao());
+            cxDataInicio.setText(s.getDataInicio());
+            cxDataFim.setText(s.getDataFim());
+            
+            tabela.setSelectedIndex(0);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao editar!");
+        }
+    }//GEN-LAST:event_bntEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntEditar;
     private javax.swing.JButton bntExcluir;
     private javax.swing.JTextField cxDataFim;
     private javax.swing.JTextField cxDataInicio;
@@ -358,8 +390,8 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTabbedPane tabela;
     private javax.swing.JTable tblSafra;
     // End of variables declaration//GEN-END:variables
 }

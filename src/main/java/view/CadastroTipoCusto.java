@@ -4,17 +4,79 @@
  */
 package view;
 
+import controller.ControlaTipoCusto;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
+import model.TipoCusto;
+
 /**
  *
  * @author henrique
  */
 public class CadastroTipoCusto extends javax.swing.JInternalFrame {
+    
+    ControlaTipoCusto ct = new ControlaTipoCusto();
+    int codigo = 0;
 
     /**
      * Creates new form CadastrarTipoCusto
      */
     public CadastroTipoCusto() {
         initComponents();
+        montaTabela();
+    }
+    
+    private void montaTabela() {
+    ArrayList<TipoCusto> t = ct.recuperarTodos();
+        if (t == null) {
+            System.out.println("Ocorreu um erro ao consultar as tarefas");
+        } else {
+        tblTipoCusto.setModel(new AbstractTableModel() {
+                @Override
+                public String getColumnName(int column) {
+                    switch (column) {
+                        case 0:
+                            return "ID";
+                        case 1:
+                            return "Descrição";
+                        case 2:
+                            return "Preço Padrão";
+                        default:
+                            return "";
+                    }
+                }
+
+                @Override
+                public int getColumnCount() {
+                    return 3;
+                }
+
+                @Override
+                public int getRowCount() {
+                    return t.size();
+                }
+
+                @Override
+                public Object getValueAt(int rowIndex, int columnIndex) {
+                    TipoCusto c = t.get(rowIndex);
+
+                    if (t != null) {
+                        switch (columnIndex) {
+                            case 0:
+                                return c.getId();
+                            case 1:
+                                return c.getDescricao();
+                            case 2:
+                                return c.getPrecoPadrao();
+                        }
+
+                    }
+
+                    return "n/d";
+                }
+            });
+        }
     }
 
     /**
@@ -27,82 +89,78 @@ public class CadastroTipoCusto extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabela = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        txtCadastrarTipoCusto = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        descricao = new javax.swing.JTextArea();
+        cxDescricao = new javax.swing.JTextArea();
         txtPrecoUnitario = new javax.swing.JLabel();
-        precoUnitario = new javax.swing.JTextField();
+        cxPrecoPadrao = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
         bntCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTipoCusto = new javax.swing.JTable();
+        bntExcluir = new javax.swing.JButton();
+        bntAtualizar = new javax.swing.JButton();
+        bntEditar = new javax.swing.JButton();
 
         setClosable(true);
-
-        txtCadastrarTipoCusto.setText("+ Cadastrar Tipo de Custo");
+        setTitle("Cadastro de Tipo de Custo");
 
         txtDescricao.setText("Descrição");
 
-        descricao.setColumns(20);
-        descricao.setRows(5);
-        jScrollPane1.setViewportView(descricao);
+        cxDescricao.setColumns(20);
+        cxDescricao.setRows(5);
+        jScrollPane1.setViewportView(cxDescricao);
 
-        txtPrecoUnitario.setText("Preço Unitário");
+        txtPrecoUnitario.setText("Preço Padrão");
 
         bntSalvar.setText("Salvar");
+        bntSalvar.addActionListener(this::bntSalvarActionPerformed);
 
         bntCancelar.setText("Cancelar");
+        bntCancelar.addActionListener(this::bntCancelarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(txtCadastrarTipoCusto))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(bntCancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bntSalvar))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtDescricao)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
-                                .addComponent(txtPrecoUnitario)
-                                .addComponent(precoUnitario)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(bntCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bntSalvar))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtDescricao)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                        .addComponent(txtPrecoUnitario)
+                        .addComponent(cxPrecoPadrao)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(txtCadastrarTipoCusto)
-                .addGap(28, 28, 28)
+                .addGap(36, 36, 36)
                 .addComponent(txtDescricao)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(41, 41, 41)
                 .addComponent(txtPrecoUnitario)
-                .addGap(18, 18, 18)
-                .addComponent(precoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cxPrecoPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntSalvar)
                     .addComponent(bntCancelar))
                 .addGap(25, 25, 25))
         );
 
-        jTabbedPane1.addTab("Tipo de Custo", jPanel1);
+        tabela.addTab("Tipo de Custo", jPanel1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTipoCusto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -113,49 +171,156 @@ public class CadastroTipoCusto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblTipoCusto);
+
+        bntExcluir.setText("Excluir");
+        bntExcluir.addActionListener(this::bntExcluirActionPerformed);
+
+        bntAtualizar.setText("Atualizar");
+        bntAtualizar.addActionListener(this::bntAtualizarActionPerformed);
+
+        bntEditar.setText("Editar");
+        bntEditar.addActionListener(this::bntEditarActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(bntExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntAtualizar)
+                        .addGap(32, 32, 32)
+                        .addComponent(bntEditar))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntExcluir)
+                    .addComponent(bntAtualizar)
+                    .addComponent(bntEditar))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tabela", jPanel2);
+        tabela.addTab("Tabela", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabela)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tabela, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
+        String descricao = cxDescricao.getText();
+        String precoPadrao = cxPrecoPadrao.getText();
+        
+        TipoCusto t = new TipoCusto();
+        t.setDescricao(descricao);
+        t.setPrecoPadrao(Double.parseDouble(precoPadrao));
+
+        cxDescricao.setText("");
+        cxPrecoPadrao.setText("");
+        
+        boolean retorno = false;
+        
+        if (codigo == 0) {
+            retorno = ct.salvar(t);
+        } else {
+            t.setId(codigo);
+            retorno = ct.editar(t);
+        }
+        
+        if (retorno) {
+            
+            if (codigo == 0) {
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            } else {
+                codigo = 0;
+                JOptionPane.showMessageDialog(null, "Editado com sucesso");
+            }
+            
+            cxDescricao.setText("");
+            cxPrecoPadrao.setText("");
+
+            cxDescricao.requestFocus();
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
+        }
+        
+        montaTabela();
+    }//GEN-LAST:event_bntSalvarActionPerformed
+
+    private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntCancelarActionPerformed
+
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+        String idString = String.valueOf(tblTipoCusto.getValueAt(tblTipoCusto.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        boolean retorno = ct.excluir(id);
+        if (retorno) {
+            JOptionPane.showMessageDialog(null, "Registro excluído com sucesso!");
+            montaTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao excluir!");
+        }
+    }//GEN-LAST:event_bntExcluirActionPerformed
+
+    private void bntAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAtualizarActionPerformed
+         montaTabela();
+    }//GEN-LAST:event_bntAtualizarActionPerformed
+
+    private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
+        String idString = String.valueOf(tblTipoCusto.getValueAt(tblTipoCusto.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        TipoCusto t = ct.recuperarUm(id);
+        if (t != null) {
+            codigo = t.getId();
+
+            cxDescricao.setText(t.getDescricao());
+            cxPrecoPadrao.setText(Double.toString(t.getPrecoPadrao()));
+
+            tabela.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao editar!");
+        }
+    }//GEN-LAST:event_bntEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntAtualizar;
     private javax.swing.JButton bntCancelar;
+    private javax.swing.JButton bntEditar;
+    private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
-    private javax.swing.JTextArea descricao;
+    private javax.swing.JTextArea cxDescricao;
+    private javax.swing.JTextField cxPrecoPadrao;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField precoUnitario;
-    private javax.swing.JLabel txtCadastrarTipoCusto;
+    private javax.swing.JTabbedPane tabela;
+    private javax.swing.JTable tblTipoCusto;
     private javax.swing.JLabel txtDescricao;
     private javax.swing.JLabel txtPrecoUnitario;
     // End of variables declaration//GEN-END:variables

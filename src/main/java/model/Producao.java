@@ -6,7 +6,9 @@ package model;
 
 public class Producao {
     
+    private int id;
     private Produto produto;
+    private Cliente cliente;
     private Safra safra;
     private String dataInicio;
     private String dataFim;
@@ -60,6 +62,21 @@ public class Producao {
     public void setPrecoUnitario(double precoUnitario) {
         this.precoUnitario = precoUnitario;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     
-   
 }

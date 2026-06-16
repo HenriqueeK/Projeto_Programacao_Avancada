@@ -4,6 +4,7 @@
  */
 package view;
 
+import apoio.Formatacao;
 import controller.ControlaCliente;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -25,6 +26,9 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     public CadastroCliente() {
         initComponents();
         montaTabela();
+        Formatacao.formatarCpf(cxCpf);
+        Formatacao.formatarTelefone(cxTelefone);
+        
     }
     
     
@@ -118,16 +122,16 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         txtNome = new javax.swing.JLabel();
         txtCpf = new javax.swing.JLabel();
-        cxCpf = new javax.swing.JTextField();
         txtTelefone = new javax.swing.JLabel();
-        cxTelefone = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JLabel();
-        cxEndereco = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
-        cxNome = new javax.swing.JTextField();
         bntCancelar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         txtObrigatorio = new javax.swing.JLabel();
+        cxEndereco = new javax.swing.JFormattedTextField();
+        cxNome = new javax.swing.JFormattedTextField();
+        cxCpf = new javax.swing.JFormattedTextField();
+        cxTelefone = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
@@ -233,27 +237,28 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         txtCpf.setText("CPF (Sómente números) *");
         jPanel4.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 114, -1, -1));
-        jPanel4.add(cxCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 152, 566, -1));
 
         txtTelefone.setText("Telefone *");
         jPanel4.add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 193, -1, -1));
-        jPanel4.add(cxTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 228, 566, -1));
 
         txtEndereco.setText("Endereço *");
         jPanel4.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 269, -1, -1));
-        jPanel4.add(cxEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 304, 566, -1));
 
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(this::bntSalvarActionPerformed);
         jPanel4.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, -1, -1));
-        jPanel4.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 73, 566, -1));
 
         bntCancelar.setText("Cancelar");
+        bntCancelar.addActionListener(this::bntCancelarActionPerformed);
         jPanel4.add(bntCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 422, 664, 10));
 
         txtObrigatorio.setText("(*) Itens Obrigatórios");
         jPanel4.add(txtObrigatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        jPanel4.add(cxEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 570, -1));
+        jPanel4.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 570, -1));
+        jPanel4.add(cxCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 570, -1));
+        jPanel4.add(cxTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 570, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -347,10 +352,12 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         c.setTelefone(telefone);
         c.setEndereco(endereco);
                 
-        cxNome.setText("");
-        cxCpf.setText("");
-        cxTelefone.setText("");
-        cxEndereco.setText("");
+        String cpfFormatado = cxCpf.getText();
+        String cpfLimpo = Formatacao.removerFormatacao(cpf);
+        
+        String telefoneFormatado = cxTelefone.getText();
+        String telefoneLimpo = Formatacao.removerFormatacao(telefone);
+        
         
         boolean retorno = false;
         
@@ -375,7 +382,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             cxTelefone.setText("");
             cxEndereco.setText("");
 
-            cxNome.requestFocus();
+            cxEndereco.requestFocus();
             montaTabela();
         } else {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
@@ -409,9 +416,9 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         if (c != null) {
             codigo = c.getId();
 
-            cxNome.setText(c.getNome());
-            cxCpf.setText(c.getCpf());
-            cxTelefone.setText(c.getTelefone());
+            cxEndereco.setText(c.getNome());
+            cxEndereco.setText(c.getCpf());
+            cxEndereco.setText(c.getTelefone());
             cxEndereco.setText(c.getEndereco());
 
             cliente.setSelectedIndex(0);
@@ -420,6 +427,10 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bntEditarActionPerformed
 
+    private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAtualizar;
     private javax.swing.JButton bntCancelar;
@@ -427,10 +438,10 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JTabbedPane cliente;
-    private javax.swing.JTextField cxCpf;
-    private javax.swing.JTextField cxEndereco;
-    private javax.swing.JTextField cxNome;
-    private javax.swing.JTextField cxTelefone;
+    private javax.swing.JFormattedTextField cxCpf;
+    private javax.swing.JFormattedTextField cxEndereco;
+    private javax.swing.JFormattedTextField cxNome;
+    private javax.swing.JFormattedTextField cxTelefone;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JDialog jDialog1;

@@ -23,7 +23,7 @@ public class TipoCustoDAO {
         String sql = ""
                 + "INSERT INTO tipo_custo (descricao, preco_padrao) VALUES ("
                 + "'" + t.getDescricao() + "',"
-                + "'" + t.getPrecoPadrao() + "',"
+                + "" + t.getPrecoPadrao() + ""
                 + ")";
 
         System.out.println("sql: " + sql);
@@ -33,9 +33,9 @@ public class TipoCustoDAO {
     
     public void editar(TipoCusto t) throws SQLException {
         String sql = ""
-                + "UPDATE safra SET "
+                + "UPDATE tipo_custo SET "
                 + "descricao = '" + t.getDescricao() + "',"
-                + "preco_padrao = '" + t.getPrecoPadrao() + "',"
+                + "preco_padrao = " + t.getPrecoPadrao() + " "
                 + "WHERE id_tipo_custo = " + t.getId();
 
         System.out.println("sql: " + sql);
@@ -47,7 +47,7 @@ public class TipoCustoDAO {
         ArrayList<TipoCusto> tipoCusto = new ArrayList();
         
         String sql = ""
-                + "SELECT * FROM safra ";
+                + "SELECT * FROM tipo_custo ";
 
         resultadoQ = ConexaoBD.executeQuery(sql);
 
@@ -66,7 +66,7 @@ public class TipoCustoDAO {
     
     public void excluir(int id) throws SQLException {
         String sql = ""
-                + "DELETE FROM safra WHERE id_safra = " + id;
+                + "DELETE FROM tipo_custo WHERE id_tipo_custo = " + id;
 
         System.out.println("sql: " + sql);
 

@@ -18,6 +18,7 @@ import model.Produto;
 public class CadastroProduto extends javax.swing.JInternalFrame {
     
     ControlaProduto cp = new ControlaProduto();
+    int codigo = 0;
 
     /** Creates new form CadastroProduto */
     public CadastroProduto() {
@@ -95,7 +96,8 @@ private void montaTabela() {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        button1 = new java.awt.Button();
+        tabela = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtNomeProduto = new javax.swing.JLabel();
         txtUnidadeMedida = new javax.swing.JLabel();
@@ -110,6 +112,7 @@ private void montaTabela() {
         tblProduto = new javax.swing.JTable();
         bntAtualizar = new javax.swing.JButton();
         bntExcluir = new javax.swing.JButton();
+        bntEditar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,6 +142,8 @@ private void montaTabela() {
 
         jTabbedPane3.addTab("tab1", jScrollPane2);
 
+        button1.setLabel("button1");
+
         setBackground(new java.awt.Color(0, 102, 102));
         setClosable(true);
         setTitle("Cadastro de Produto");
@@ -167,7 +172,7 @@ private void montaTabela() {
         txtObrigatorio.setText("(*) Itens Obrigatórios");
         jPanel1.add(txtObrigatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, -1, -1));
 
-        jTabbedPane1.addTab("Produto", jPanel1);
+        tabela.addTab("Produto", jPanel1);
 
         tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -188,44 +193,49 @@ private void montaTabela() {
         bntExcluir.setText("Excluir");
         bntExcluir.addActionListener(this::bntExcluirActionPerformed);
 
+        bntEditar.setText("Editar");
+        bntEditar.addActionListener(this::bntEditarActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(bntAtualizar)
-                        .addGap(29, 29, 29)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(bntExcluir)
-                        .addGap(4, 4, 4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntAtualizar)
+                        .addGap(26, 26, 26)
+                        .addComponent(bntEditar)))
                 .addGap(17, 17, 17))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAtualizar)
-                    .addComponent(bntExcluir))
+                    .addComponent(bntExcluir)
+                    .addComponent(bntEditar))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tabela de Produtos", jPanel3);
+        tabela.addTab("Tabela de Produtos", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabela)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tabela, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -284,11 +294,30 @@ private void montaTabela() {
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarActionPerformed
 
+    private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
+        String idString = String.valueOf(tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
+        int id = Integer.parseInt(idString);
+
+        Produto p = cp.recuperarUm(id);
+        if (p != null) {
+            codigo = p.getId();
+
+            cxNome.setText(p.getNome());
+            cxUnidade.setText(p.getUnidade());
+            tabela.setSelectedIndex(0);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao editar!");
+        }
+    }//GEN-LAST:event_bntEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAtualizar;
+    private javax.swing.JButton bntEditar;
     private javax.swing.JButton bntExcluir;
     private javax.swing.JButton bntSalvar;
+    private java.awt.Button button1;
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField cxNome;
     private javax.swing.JTextField cxUnidade;
@@ -299,11 +328,11 @@ private void montaTabela() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTabbedPane tabela;
     private javax.swing.JTable tblProduto;
     private javax.swing.JLabel txtNomeProduto;
     private javax.swing.JLabel txtObrigatorio;

@@ -30,13 +30,6 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jTextField9 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabelaProducao = new javax.swing.JTable();
@@ -57,6 +50,13 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         cancelar = new javax.swing.JButton();
         nomeSafra = new javax.swing.JTextField();
         dataFim1 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jTextField9 = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -64,6 +64,90 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Cadastro de produção");
+
+        tabelaProducao.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tabelaProducao);
+
+        butAtualizar.setText("Atualizar");
+        butAtualizar.addActionListener(this::butAtualizarActionPerformed);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(586, Short.MAX_VALUE)
+                .addComponent(butAtualizar)
+                .addGap(16, 16, 16))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(butAtualizar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Tabela de Produções", jPanel4);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtProduto.setText("Produto");
+        jPanel1.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 46, -1, -1));
+
+        txtNomeSafra.setText("Nome da Safra");
+        jPanel1.add(txtNomeSafra, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 110, -1, 25));
+
+        nomeProduto.addActionListener(this::nomeProdutoActionPerformed);
+        jPanel1.add(nomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 69, 549, -1));
+
+        txtDataInicio.setText("Data de Inicio");
+        jPanel1.add(txtDataInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 316, -1, -1));
+
+        txtDataFim.setText("Data de Fim");
+        jPanel1.add(txtDataFim, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 316, -1, -1));
+        jPanel1.add(precoUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 275, 549, -1));
+
+        txtQuantidadeProduzida.setText("Quantidade Produzida");
+        jPanel1.add(txtQuantidadeProduzida, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 182, -1, -1));
+        jPanel1.add(quantidadeProduzida, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 211, 549, -1));
+
+        txtPrecoUnitario.setText("Preço Unitário estimado");
+        jPanel1.add(txtPrecoUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 252, -1, -1));
+        jPanel1.add(dataFim, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 345, 250, -1));
+
+        cadastraCusto.setText("Você Deseja Cadastrar um Custo?");
+        cadastraCusto.addActionListener(this::cadastraCustoActionPerformed);
+        jPanel1.add(cadastraCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
+
+        salvar.setText("Salvar");
+        salvar.addActionListener(this::salvarActionPerformed);
+        jPanel1.add(salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, -1, -1));
+
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(this::cancelarActionPerformed);
+        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, -1, -1));
+
+        nomeSafra.addActionListener(this::nomeSafraActionPerformed);
+        jPanel1.add(nomeSafra, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 141, 549, -1));
+        jPanel1.add(dataFim1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 345, 250, -1));
+
+        jTabbedPane1.addTab("Produção", jPanel1);
 
         jLabel9.setText("Descrição");
 
@@ -115,87 +199,6 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.addTab("Custo", jPanel3);
-
-        tabelaProducao.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(tabelaProducao);
-
-        butAtualizar.setText("Atualizar");
-        butAtualizar.addActionListener(this::butAtualizarActionPerformed);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(butAtualizar)
-                .addGap(16, 16, 16))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(butAtualizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Tabela de Produções", jPanel4);
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        txtProduto.setText("Produto");
-        jPanel1.add(txtProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 46, -1, -1));
-
-        txtNomeSafra.setText("Nome da Safra");
-        jPanel1.add(txtNomeSafra, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 110, -1, 25));
-
-        nomeProduto.addActionListener(this::nomeProdutoActionPerformed);
-        jPanel1.add(nomeProduto, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 69, 549, -1));
-
-        txtDataInicio.setText("Data de Inicio");
-        jPanel1.add(txtDataInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 316, -1, -1));
-
-        txtDataFim.setText("Data de Fim");
-        jPanel1.add(txtDataFim, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 316, -1, -1));
-        jPanel1.add(precoUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 275, 549, -1));
-
-        txtQuantidadeProduzida.setText("Quantidade Produzida");
-        jPanel1.add(txtQuantidadeProduzida, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 182, -1, -1));
-        jPanel1.add(quantidadeProduzida, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 211, 549, -1));
-
-        txtPrecoUnitario.setText("Preço Unitário estimado");
-        jPanel1.add(txtPrecoUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 252, -1, -1));
-        jPanel1.add(dataFim, new org.netbeans.lib.awtextra.AbsoluteConstraints(365, 345, 250, -1));
-
-        cadastraCusto.setText("Você Deseja Cadastrar um Custo?");
-        cadastraCusto.addActionListener(this::cadastraCustoActionPerformed);
-        jPanel1.add(cadastraCusto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, -1, -1));
-
-        salvar.setText("Salvar");
-        salvar.addActionListener(this::salvarActionPerformed);
-        jPanel1.add(salvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, -1, -1));
-
-        cancelar.setText("Cancelar");
-        cancelar.addActionListener(this::cancelarActionPerformed);
-        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, -1, -1));
-
-        nomeSafra.addActionListener(this::nomeSafraActionPerformed);
-        jPanel1.add(nomeSafra, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 141, 549, -1));
-        jPanel1.add(dataFim1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 345, 250, -1));
-
-        jTabbedPane1.addTab("Produção", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

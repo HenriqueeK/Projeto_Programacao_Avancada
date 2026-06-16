@@ -4,7 +4,6 @@
  */
 package controller;
 
-import entidades.DAO.ClienteDAO;
 import entidades.DAO.ProducaoDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
