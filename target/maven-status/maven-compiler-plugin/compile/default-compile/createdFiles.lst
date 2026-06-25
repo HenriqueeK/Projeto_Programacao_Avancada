@@ -16,6 +16,7 @@ model/Custo.class
 model/Produto.class
 controller/ControlaTipoCusto.class
 entidades/DAO/UsuarioDAO.class
+apoio/Validacao.class
 model/ComboItem.class
 view/CadastroCliente.class
 view/CadastroProduto.class

@@ -357,6 +357,24 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
         p.setCliente(cliente);
         
         boolean retorno = false;
+        
+        if (cxDataInicio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data de Início é obrigatória!");
+            return;
+        }
+        if (cxDataFim.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data de Fim é obrigatória!");
+            return;
+        }
+        if (cxQuantidadeProduzida.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Quantidade é obrigatória!");
+            return;
+        }
+        if (cxPrecoUnitario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preço Unitário é obrigatório!");
+            return;
+        }
+        
         if (codigo == 0) {
             retorno = cp.salvar(p);
         } else {

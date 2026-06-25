@@ -231,6 +231,15 @@ public class CadastroTipoCusto extends javax.swing.JInternalFrame {
         
         boolean retorno = false;
         
+        if (cxDescricao.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Descrição é obrigatória!");
+            return;
+        }
+        if (cxPrecoPadrao.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preço Padrão é obrigatório!");
+            return;
+        }
+        
         if (codigo == 0) {
             retorno = ct.salvar(t);
         } else {

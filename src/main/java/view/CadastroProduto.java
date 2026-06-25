@@ -258,6 +258,16 @@ private void montaTabela() {
         p.setNome(nome);
         p.setUnidade(unidade);
         
+        if (cxNome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nome é obrigatório!");
+            return;
+        }
+        
+        if (cxUnidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Unidade é obrigatória!");
+            return;
+        }
+        
         cxNome.setText("");
         cxUnidade.setText("");
         boolean retorno = cp.salvar(p);

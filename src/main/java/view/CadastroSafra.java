@@ -261,6 +261,19 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         String dataFimFormatado = cxDataFim.getText();
         String dataFimLimpo = Formatacao.removerFormatacao(dataFim);
         
+        if (cxNome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nome é obrigatório!");
+            return;
+        }
+        if (cxDataInicio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data de Início é obrigatória!");
+            return;
+        }
+        if (cxDataFim.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data de Fim é obrigatória!");
+            return;
+        }
+        
         cxNome.setText("");
         cxDescricao.setText("");
         cxDataInicio.setText("");

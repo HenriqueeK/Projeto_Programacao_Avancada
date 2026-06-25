@@ -237,6 +237,11 @@ public class CadastroCusto extends javax.swing.JInternalFrame {
         c.setTipoCusto(tipoCusto);
 
         boolean retorno = false;
+        
+        if (cxValor.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Valor é obrigatório!");
+            return;
+        }
 
         if (codigo == 0) {
             retorno = cc.salvar(c);
