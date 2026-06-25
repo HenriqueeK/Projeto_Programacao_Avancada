@@ -9,7 +9,7 @@ public class Cliente {
     private int id;
 
     private String nome;
-    private String cpf;
+    private String documento;
     private String telefone;
     private String endereco;
 
@@ -20,13 +20,13 @@ public class Cliente {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getCpf() {
-        return cpf;
+    
+    public String getDocumento() {
+        return documento;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public String getTelefone() {
@@ -46,7 +46,7 @@ public class Cliente {
     }
     @Override
     public String toString() {
-        String retorno = nome + ";" + cpf + ";" + telefone + ";" + endereco;
+        String retorno = nome + ";" + documento + ";" + telefone + ";" + endereco;
         return retorno;
     }
     

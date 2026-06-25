@@ -89,7 +89,7 @@ public class SafraDAO {
             Safra s = new Safra();
 
             s.setId(resultadoQ.getInt("id_safra"));
-            s.setNome(resultadoQ.getString("safra"));
+            s.setNome(resultadoQ.getString("nome"));
             s.setDescricao(resultadoQ.getString("descricao"));
             s.setDataInicio(resultadoQ.getString("data_inicio"));
             s.setDataFim(resultadoQ.getString("data_fim"));

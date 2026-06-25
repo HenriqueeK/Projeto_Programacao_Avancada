@@ -20,9 +20,9 @@ public class ClienteDAO {
     
     public void salvar(Cliente c) throws SQLException {
         String sql = ""
-                + "INSERT INTO cliente (nome, cpf, telefone, endereco) VALUES ("
+                + "INSERT INTO cliente (nome, documento, telefone, endereco) VALUES ("
                 + "'" + c.getNome() + "',"
-                + "'" + c.getCpf() + "',"
+                + "'" + c.getDocumento() + "',"
                 + "'" + c.getTelefone() + "',"
                 + "'" + c.getEndereco() + "' "
                 + ")";
@@ -36,7 +36,7 @@ public class ClienteDAO {
         String sql = ""
                 + "UPDATE cliente SET "
                 + "nome = '" + c.getNome() + "',"
-                + "cpf= '" + c.getCpf() + "',"
+                + "documento= '" + c.getDocumento() + "',"
                 + "telefone = '" + c.getTelefone() + "',"
                 + "endereco = '" + c.getEndereco() + "' "
                 + "WHERE id_cliente = " + c.getId();
@@ -59,7 +59,7 @@ public class ClienteDAO {
 
             c.setId(resultadoQ.getInt("id_cliente"));
             c.setNome(resultadoQ.getString("nome"));
-            c.setCpf(resultadoQ.getString("cpf"));
+            c.setDocumento(resultadoQ.getString("documento"));
             c.setTelefone(resultadoQ.getString("telefone"));
             c.setEndereco(resultadoQ.getString("endereco"));
 
@@ -82,7 +82,7 @@ public class ClienteDAO {
 
             c.setId(resultadoQ.getInt("id_cliente"));
             c.setNome(resultadoQ.getString("nome"));
-            c.setCpf(resultadoQ.getString("cpf"));
+            c.setDocumento(resultadoQ.getString("documento"));
             c.setTelefone(resultadoQ.getString("telefone"));
             c.setEndereco(resultadoQ.getString("endereco"));
 

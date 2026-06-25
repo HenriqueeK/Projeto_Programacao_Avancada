@@ -5,7 +5,9 @@
 package view;
 
 import apoio.Formatacao;
+import apoio.PDFManager;
 import controller.ControlaCliente;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
@@ -26,7 +28,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     public CadastroCliente() {
         initComponents();
         montaTabela();
-        Formatacao.formatarCpf(cxCpf);
+        Formatacao.formatarCpf(cxDocumento);
         Formatacao.formatarTelefone(cxTelefone);
         
     }
@@ -46,7 +48,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                         case 1:
                             return "Nome";
                         case 2:
-                            return "CPF";
+                            return "Documento";
                         case 3:
                             return "Telefone";
                         case 4:
@@ -77,7 +79,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                             case 1:
                                 return t.getNome();
                             case 2:
-                                return t.getCpf();
+                                return t.getDocumento();
                             case 3:
                                 return t.getTelefone();
                             case 4:
@@ -125,19 +127,20 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         txtTelefone = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JLabel();
         bntSalvar = new javax.swing.JButton();
-        bntCancelar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         txtObrigatorio = new javax.swing.JLabel();
         cxEndereco = new javax.swing.JFormattedTextField();
         cxNome = new javax.swing.JFormattedTextField();
-        cxCpf = new javax.swing.JFormattedTextField();
+        cxDocumento = new javax.swing.JFormattedTextField();
         cxTelefone = new javax.swing.JFormattedTextField();
+        selecionar = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
         bntExcluir = new javax.swing.JButton();
         bntAtualizar = new javax.swing.JButton();
         bntEditar = new javax.swing.JButton();
+        bntPDF = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -225,46 +228,87 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setBackground(new java.awt.Color(0, 153, 153));
         setClosable(true);
         setTitle("Cadastro de Cliente");
 
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNome.setText("Nome *");
-        jPanel4.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 44, -1, -1));
 
-        txtCpf.setText("CPF (Sómente números) *");
-        jPanel4.add(txtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 114, -1, -1));
+        txtCpf.setText("Documento *");
 
         txtTelefone.setText("Telefone *");
-        jPanel4.add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 193, -1, -1));
 
         txtEndereco.setText("Endereço *");
-        jPanel4.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 269, -1, -1));
 
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(this::bntSalvarActionPerformed);
-        jPanel4.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, -1, -1));
-
-        bntCancelar.setText("Cancelar");
-        bntCancelar.addActionListener(this::bntCancelarActionPerformed);
-        jPanel4.add(bntCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, -1, -1));
-        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 422, 664, 10));
 
         txtObrigatorio.setText("(*) Itens Obrigatórios");
-        jPanel4.add(txtObrigatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
-        jPanel4.add(cxEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 570, -1));
-        jPanel4.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 570, -1));
-        jPanel4.add(cxCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 570, -1));
-        jPanel4.add(cxTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 570, -1));
+
+        selecionar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CPF", "CNPJ" }));
+        selecionar.addActionListener(this::selecionarActionPerformed);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bntSalvar)
+                .addGap(53, 53, 53))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNome)
+                    .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCpf)
+                    .addComponent(selecionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cxDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefone)
+                    .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEndereco)
+                    .addComponent(cxEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtObrigatorio)))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(txtNome)
+                .addGap(13, 13, 13)
+                .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtCpf)
+                .addGap(13, 13, 13)
+                .addComponent(selecionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(cxDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtTelefone)
+                .addGap(13, 13, 13)
+                .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(txtEndereco)
+                .addGap(13, 13, 13)
+                .addComponent(cxEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(txtObrigatorio)
+                .addGap(15, 15, 15)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bntSalvar)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,6 +339,9 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         bntEditar.setText("Editar");
         bntEditar.addActionListener(this::bntEditarActionPerformed);
 
+        bntPDF.setText("Exportar PDF");
+        bntPDF.addActionListener(this::bntPDFActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -305,22 +352,25 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(bntExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntPDF)
+                        .addGap(18, 18, 18)
                         .addComponent(bntAtualizar)
                         .addGap(18, 18, 18)
                         .addComponent(bntEditar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAtualizar)
                     .addComponent(bntExcluir)
-                    .addComponent(bntEditar))
+                    .addComponent(bntEditar)
+                    .addComponent(bntPDF))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -342,24 +392,40 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         String nome = cxNome.getText();
-        String cpf = cxCpf.getText();
+        String documento = cxDocumento.getText();
         String telefone = cxTelefone.getText();
         String endereco = cxEndereco.getText();
         
-        Cliente c = new Cliente();
-        c.setNome(nome);
-        c.setCpf(cpf);
-        c.setTelefone(telefone);
-        c.setEndereco(endereco);
-                
-        String cpfFormatado = cxCpf.getText();
-        String cpfLimpo = Formatacao.removerFormatacao(cpf);
+        String cpfFormatado = cxDocumento.getText();
+        String cpfLimpo = Formatacao.removerFormatacao(documento);
         
         String telefoneFormatado = cxTelefone.getText();
         String telefoneLimpo = Formatacao.removerFormatacao(telefone);
         
-        
+        Cliente c = new Cliente();
+        c.setNome(nome);
+        c.setDocumento(cpfLimpo);
+        c.setTelefone(telefoneLimpo);
+        c.setEndereco(endereco);
+               
         boolean retorno = false;
+        
+        if (cxNome.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nome é obrigatório!");
+            return;
+        }
+        if (Formatacao.removerFormatacao(cxDocumento.getText()).trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Documento é obrigatório!");
+            return;
+        }
+        if (Formatacao.removerFormatacao(cxTelefone.getText()).trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Telefone é obrigatório!");
+            return;
+        }
+        if (cxEndereco.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Endereço é obrigatório!");
+            return;
+        }
         
         if (codigo == 0) {
             retorno = cc.salvar(c);
@@ -378,12 +444,12 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             }
             
             cxNome.setText("");
-            cxCpf.setText("");
+            cxDocumento.setText("");
             cxTelefone.setText("");
             cxEndereco.setText("");
 
             cxEndereco.requestFocus();
-            montaTabela();
+            
         } else {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
         }
@@ -416,9 +482,9 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         if (c != null) {
             codigo = c.getId();
 
-            cxEndereco.setText(c.getNome());
-            cxEndereco.setText(c.getCpf());
-            cxEndereco.setText(c.getTelefone());
+            cxNome.setText(c.getNome());
+            cxDocumento.setText(c.getDocumento());
+            cxTelefone.setText(c.getTelefone());
             cxEndereco.setText(c.getEndereco());
 
             cliente.setSelectedIndex(0);
@@ -427,18 +493,31 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bntEditarActionPerformed
 
-    private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bntCancelarActionPerformed
+    private void bntPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPDFActionPerformed
+        ArrayList<Cliente> c = cc.recuperarTodos();
+        try {
+            PDFManager.gerar(c, "cliente.pdf");} 
+        
+        catch (IOException ex) {
+            System.getLogger(CadastroSafra.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }        }//GEN-LAST:event_bntPDFActionPerformed
+
+    private void selecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarActionPerformed
+      if (selecionar.getSelectedIndex() == 0) {
+        Formatacao.formatarCpf(cxDocumento);
+    } else {
+        Formatacao.formatarCnpj(cxDocumento);
+    }
+    }//GEN-LAST:event_selecionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAtualizar;
-    private javax.swing.JButton bntCancelar;
     private javax.swing.JButton bntEditar;
     private javax.swing.JButton bntExcluir;
+    private javax.swing.JButton bntPDF;
     private javax.swing.JButton bntSalvar;
     private javax.swing.JTabbedPane cliente;
-    private javax.swing.JFormattedTextField cxCpf;
+    private javax.swing.JFormattedTextField cxDocumento;
     private javax.swing.JFormattedTextField cxEndereco;
     private javax.swing.JFormattedTextField cxNome;
     private javax.swing.JFormattedTextField cxTelefone;
@@ -463,6 +542,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private java.awt.ScrollPane scrollPane1;
+    private javax.swing.JComboBox<String> selecionar;
     private javax.swing.JTable tblCliente;
     private javax.swing.JLabel txtCpf;
     private javax.swing.JLabel txtEndereco;

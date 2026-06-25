@@ -85,7 +85,7 @@ public class ProdutoDAO {
         String sql = ""
                 + "UPDATE produto SET "
                 + "nome = '" + p.getNome() + "',"
-                + "unidade = '" + p.getUnidade() + "',"
+                + "unidade = '" + p.getUnidade() + "' "
                 + "WHERE id_produto = " + p.getId();
 
         System.out.println("sql: " + sql);

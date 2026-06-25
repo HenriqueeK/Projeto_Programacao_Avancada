@@ -4,7 +4,10 @@
  */
 package view;
 
+import apoio.Formatacao;
+import apoio.PDFManager;
 import controller.ControlaSafra;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
@@ -26,6 +29,8 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
     public CadastroSafra() {
         initComponents();
         montaTabela();
+        Formatacao.formatarData(cxDataInicio);
+        Formatacao.formatarData(cxDataFim);
         
 
     }
@@ -104,23 +109,24 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         tabela = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        cxNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cxDescricao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cxDataInicio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        cxDataFim = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
+        cxDataInicio = new javax.swing.JFormattedTextField();
+        cxDataFim = new javax.swing.JFormattedTextField();
+        cxNome = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cxDescricao = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSafra = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         bntExcluir = new javax.swing.JButton();
         bntEditar = new javax.swing.JButton();
+        bntPDF = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -129,86 +135,38 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Cadastro de Safra");
 
-        jLabel2.setText("Nome *");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cxNome.addActionListener(this::cxNomeActionPerformed);
+        jLabel2.setText("Nome *");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         jLabel3.setText("Descrição");
-
-        cxDescricao.addActionListener(this::cxDescricaoActionPerformed);
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
         jLabel4.setText("Data de Inicio *");
-
-        cxDataInicio.addActionListener(this::cxDataInicioActionPerformed);
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         jLabel5.setText("Data de fim (extimativa) *");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(this::jButton1ActionPerformed);
-
-        jButton2.setText("Cancelar");
-
-        cxDataFim.addActionListener(this::cxDataFimActionPerformed);
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 432, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 670, -1));
 
         jLabel6.setText("(*) Itens Obrigatórios");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 435, -1, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(66, 66, 66))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(cxDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cxDataInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
-                        .addComponent(cxDescricao)
-                        .addComponent(cxNome)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(27, 27, 27))
-        );
+        cxDataInicio.addActionListener(this::cxDataInicioActionPerformed);
+        jPanel1.add(cxDataInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 210, -1));
+        jPanel1.add(cxDataFim, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 210, -1));
+        jPanel1.add(cxNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 540, -1));
+
+        cxDescricao.setColumns(20);
+        cxDescricao.setRows(5);
+        jScrollPane1.setViewportView(cxDescricao);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 540, -1));
 
         tabela.addTab("Safra", jPanel1);
 
@@ -234,35 +192,39 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         bntEditar.setText("Editar");
         bntEditar.addActionListener(this::bntEditarActionPerformed);
 
+        bntPDF.setText("Exportar PDF");
+        bntPDF.addActionListener(this::bntPDFActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(bntExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntPDF)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(bntEditar)
-                        .addGap(37, 37, 37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
+                        .addComponent(bntEditar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bntExcluir)
+                    .addComponent(bntPDF)
                     .addComponent(jButton3)
-                    .addComponent(bntEditar))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(bntEditar)
+                    .addComponent(bntExcluir))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         tabela.addTab("Tabela de Safras", jPanel3);
@@ -271,31 +233,15 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabela)
+            .addComponent(tabela, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 636, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabela)
+            .addComponent(tabela, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cxNomeActionPerformed
-
-    private void cxDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxDescricaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cxDescricaoActionPerformed
-
-    private void cxDataInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxDataInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cxDataInicioActionPerformed
-
-    private void cxDataFimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxDataFimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cxDataFimActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nome = cxNome.getText();
@@ -308,6 +254,12 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         s.setDescricao(descricao);
         s.setDataInicio(dataInicio);
         s.setDataFim(dataFim);
+        
+        String dataInicioFormatado = cxDataInicio.getText();
+        String dataInicioLimpo = Formatacao.removerFormatacao(dataInicio);
+        
+        String dataFimFormatado = cxDataFim.getText();
+        String dataFimLimpo = Formatacao.removerFormatacao(dataFim);
         
         cxNome.setText("");
         cxDescricao.setText("");
@@ -323,7 +275,6 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
             cxDataInicio.setText("");
             cxDataFim.setText("");
             cxNome.requestFocus();
-            montaTabela();
         } else {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
         }
@@ -369,16 +320,30 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bntEditarActionPerformed
 
+    private void bntPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPDFActionPerformed
+        ArrayList<Safra> s = cs.recuperarTodos();
+        try {
+            PDFManager.gerar(s, "safra.pdf");} 
+        
+        catch (IOException ex) {
+            System.getLogger(CadastroSafra.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_bntPDFActionPerformed
+
+    private void cxDataInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxDataInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxDataInicioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntEditar;
     private javax.swing.JButton bntExcluir;
-    private javax.swing.JTextField cxDataFim;
-    private javax.swing.JTextField cxDataInicio;
-    private javax.swing.JTextField cxDescricao;
-    private javax.swing.JTextField cxNome;
+    private javax.swing.JButton bntPDF;
+    private javax.swing.JFormattedTextField cxDataFim;
+    private javax.swing.JFormattedTextField cxDataInicio;
+    private javax.swing.JTextArea cxDescricao;
+    private javax.swing.JFormattedTextField cxNome;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -388,6 +353,7 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField3;

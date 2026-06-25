@@ -5,11 +5,14 @@
 
 package view;
 
+import apoio.PDFManager;
 import controller.ControlaProduto;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import model.Produto;
+import model.Safra;
 
 /**
  *
@@ -103,7 +106,6 @@ private void montaTabela() {
         txtUnidadeMedida = new javax.swing.JLabel();
         cxNome = new javax.swing.JTextField();
         bntSalvar = new javax.swing.JButton();
-        cancelar = new javax.swing.JButton();
         cxUnidade = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         txtObrigatorio = new javax.swing.JLabel();
@@ -113,6 +115,7 @@ private void montaTabela() {
         bntAtualizar = new javax.swing.JButton();
         bntExcluir = new javax.swing.JButton();
         bntEditar = new javax.swing.JButton();
+        bntPDF = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,7 +147,6 @@ private void montaTabela() {
 
         button1.setLabel("button1");
 
-        setBackground(new java.awt.Color(0, 102, 102));
         setClosable(true);
         setTitle("Cadastro de Produto");
 
@@ -162,10 +164,6 @@ private void montaTabela() {
         bntSalvar.setText("Salvar");
         bntSalvar.addActionListener(this::bntSalvarActionPerformed);
         jPanel1.add(bntSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
-
-        cancelar.setText("Cancelar");
-        cancelar.addActionListener(this::cancelarActionPerformed);
-        jPanel1.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, -1, -1));
         jPanel1.add(cxUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 167, 552, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 636, 10));
 
@@ -196,6 +194,9 @@ private void montaTabela() {
         bntEditar.setText("Editar");
         bntEditar.addActionListener(this::bntEditarActionPerformed);
 
+        bntPDF.setText("Exportar PDF");
+        bntPDF.addActionListener(this::bntPDFActionPerformed);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -207,8 +208,10 @@ private void montaTabela() {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(bntExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bntPDF)
+                        .addGap(18, 18, 18)
                         .addComponent(bntAtualizar)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(bntEditar)))
                 .addGap(17, 17, 17))
         );
@@ -221,7 +224,8 @@ private void montaTabela() {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntAtualizar)
                     .addComponent(bntExcluir)
-                    .addComponent(bntEditar))
+                    .addComponent(bntEditar)
+                    .addComponent(bntPDF))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -264,7 +268,6 @@ private void montaTabela() {
             cxNome.setText("");
             cxUnidade.setText("");
             cxNome.requestFocus();
-            montaTabela();
         } else {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs do sistema.");
         }
@@ -290,10 +293,6 @@ private void montaTabela() {
         }       
     }//GEN-LAST:event_bntExcluirActionPerformed
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelarActionPerformed
-
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
         String idString = String.valueOf(tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
         int id = Integer.parseInt(idString);
@@ -311,14 +310,24 @@ private void montaTabela() {
         }
     }//GEN-LAST:event_bntEditarActionPerformed
 
+    private void bntPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPDFActionPerformed
+        ArrayList<Produto> p = cp.recuperarTodos();
+        try {
+            PDFManager.gerar(p, "produto.pdf");} 
+        
+        catch (IOException ex) {
+            System.getLogger(CadastroSafra.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }            // TODO add your handling code here:
+    }//GEN-LAST:event_bntPDFActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntAtualizar;
     private javax.swing.JButton bntEditar;
     private javax.swing.JButton bntExcluir;
+    private javax.swing.JButton bntPDF;
     private javax.swing.JButton bntSalvar;
     private java.awt.Button button1;
-    private javax.swing.JButton cancelar;
     private javax.swing.JTextField cxNome;
     private javax.swing.JTextField cxUnidade;
     private javax.swing.JPanel jPanel1;

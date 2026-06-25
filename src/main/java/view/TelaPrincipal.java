@@ -41,9 +41,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cadastroProduto = new javax.swing.JMenuItem();
-        cadastroProducao = new javax.swing.JMenuItem();
         cadastroSafra = new javax.swing.JMenuItem();
         cadastroCliente = new javax.swing.JMenuItem();
+        cadastroProducao = new javax.swing.JMenuItem();
+        cadastroCusto = new javax.swing.JMenuItem();
         cadastroTipoProduto = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem3.setSelected(true);
@@ -77,10 +78,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastroProduto.addActionListener(this::cadastroProdutoActionPerformed);
         jMenu1.add(cadastroProduto);
 
-        cadastroProducao.setText("Cadastro de Produção");
-        cadastroProducao.addActionListener(this::cadastroProducaoActionPerformed);
-        jMenu1.add(cadastroProducao);
-
         cadastroSafra.setText("Cadastro de Safra");
         cadastroSafra.addActionListener(this::cadastroSafraActionPerformed);
         jMenu1.add(cadastroSafra);
@@ -88,6 +85,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastroCliente.setText("Cadastro Cliente");
         cadastroCliente.addActionListener(this::cadastroClienteActionPerformed);
         jMenu1.add(cadastroCliente);
+
+        cadastroProducao.setText("Cadastro de Produção");
+        cadastroProducao.addActionListener(this::cadastroProducaoActionPerformed);
+        jMenu1.add(cadastroProducao);
+
+        cadastroCusto.setText("Cadastro de Custo");
+        cadastroCusto.addActionListener(this::cadastroCustoActionPerformed);
+        jMenu1.add(cadastroCusto);
 
         cadastroTipoProduto.setText("Cadastro Tipo de Produto");
         cadastroTipoProduto.addActionListener(this::cadastroTipoProdutoActionPerformed);
@@ -141,6 +146,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         desktopPanel.add(ctc);
     }//GEN-LAST:event_cadastroTipoProdutoActionPerformed
 
+    private void cadastroCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroCustoActionPerformed
+        CadastroCusto cc = new CadastroCusto();
+        cc.setVisible(true);
+        desktopPanel.add(cc);// TODO add your handling code here:
+    }//GEN-LAST:event_cadastroCustoActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -165,6 +176,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cadastroCliente;
+    private javax.swing.JMenuItem cadastroCusto;
     private javax.swing.JMenuItem cadastroProducao;
     private javax.swing.JMenuItem cadastroProduto;
     private javax.swing.JMenuItem cadastroSafra;

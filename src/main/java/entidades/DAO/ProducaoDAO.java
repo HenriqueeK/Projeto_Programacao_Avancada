@@ -50,6 +50,7 @@ public class ProducaoDAO {
         resultadoQ = ConexaoBD.executeQuery(sql);
         while (resultadoQ.next()) {
             Producao p = new Producao();
+            
             p.setId(resultadoQ.getInt("id_producao"));
 
             Produto produto = new Produto();
