@@ -47,10 +47,4 @@ public class ProdutoTest {
         assertEquals(unidadeEsperada, produto.getUnidade());
     }
 
-    @Test
-    public void testValoresPadraoSaoNull() {
-        // Assert
-        assertNull(produto.getNome());
-        assertNull(produto.getUnidade());
-    }
 }

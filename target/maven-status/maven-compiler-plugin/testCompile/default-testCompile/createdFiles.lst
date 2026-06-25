@@ -1,0 +1,9 @@
+model/ProdutoTest.class
+apoio/ConexaoBDTest.class
+model/CustoTest.class
+entidades/DAO/ClienteDAOTest.class
+entidades/DAO/ProdutoDAOTest.class
+model/ClienteTest.class
+model/SafraTest.class
+model/TipoCustoTest.class
+model/ProducaoTest.class

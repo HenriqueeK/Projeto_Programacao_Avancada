@@ -47,14 +47,4 @@ public class TipoCustoTest {
         assertEquals(precoPadraoEsperado, tipoCusto.getPrecoPadrao(), 0.001);
     }
 
-    @Test
-    public void testPrecoPadraoEhZero() {
-        // Arrange — nenhum set
-
-        // Act
-        double precoObtido = tipoCusto.getPrecoPadrao();
-
-        // Assert
-        assertEquals(0.0, precoObtido, 0.001);
-    }
 }

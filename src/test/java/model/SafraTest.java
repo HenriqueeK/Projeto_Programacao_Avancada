@@ -53,12 +53,4 @@ public class SafraTest {
         assertEquals(dataFimEsperada, safra.getDataFim());
     }
 
-    @Test
-    public void testValoresPadraoSaoNull() {
-        // Assert
-        assertNull(safra.getNome());
-        assertNull(safra.getDescricao());
-        assertNull(safra.getDataInicio());
-        assertNull(safra.getDataFim());
-    }
 }

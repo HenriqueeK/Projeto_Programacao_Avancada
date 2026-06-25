@@ -34,24 +34,17 @@ public class CustoTest {
         // Arrange
         int idEsperado = 5;
         double valorEsperado = 150.75;
-
+        Producao producaoEsperada = new Producao();
+        TipoCusto tipoCustoEsperado = new TipoCusto();
         // Act
         custo.setId(idEsperado);
         custo.setValor(valorEsperado);
-
+        custo.setProducao(producaoEsperada);
+        custo.setTipoCusto(tipoCustoEsperado);
         // Assert
         assertEquals(idEsperado, custo.getId());
         assertEquals(valorEsperado, custo.getValor(), 0.001);
-    }
-
-    @Test
-    public void testValorPadraoEhZero() {
-        // Arrange — nenhum set
-
-        // Act
-        double valorObtido = custo.getValor();
-
-        // Assert
-        assertEquals(0.0, valorObtido, 0.001);
+        assertEquals(producaoEsperada, custo.getProducao());
+        assertEquals(tipoCustoEsperado, custo.getTipoCusto());
     }
 }

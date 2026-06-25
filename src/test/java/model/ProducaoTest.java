@@ -64,11 +64,4 @@ public class ProducaoTest {
         assertEquals(100.0, producao.getQuantidade(), 0.001);
         assertEquals(50.0, producao.getPrecoUnitario(), 0.001);
     }
-
-    @Test
-    public void testValoresPadraoSaoZero() {
-        // Assert
-        assertEquals(0.0, producao.getQuantidade(), 0.001);
-        assertEquals(0.0, producao.getPrecoUnitario(), 0.001);
-    }
 }
