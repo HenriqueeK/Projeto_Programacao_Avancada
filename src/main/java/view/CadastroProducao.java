@@ -301,11 +301,11 @@ public class CadastroProducao extends javax.swing.JInternalFrame {
                             case 0:
                                 return t.getId();
                             case 1:
-                                return t.getCliente().getNome();
+                                return t.getCliente().getId();
                             case 2:
-                                return t.getProduto().getNome();
+                                return t.getProduto().getId();
                             case 3:
-                                return t.getSafra().getNome();
+                                return t.getSafra().getId();
                             case 4:
                                 return t.getQuantidade();
                             case 5:

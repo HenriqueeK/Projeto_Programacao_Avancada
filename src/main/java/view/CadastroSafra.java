@@ -248,51 +248,44 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         String descricao = cxDescricao.getText();
         String dataInicio = cxDataInicio.getText();
         String dataFim = cxDataFim.getText();
-        
-        Safra s = new Safra();
-        s.setNome(nome);
-        s.setDescricao(descricao);
-        s.setDataInicio(dataInicio);
-        s.setDataFim(dataFim);
-        
-        String dataInicioFormatado = cxDataInicio.getText();
-        String dataInicioLimpo = Formatacao.removerFormatacao(dataInicio);
-        
-        String dataFimFormatado = cxDataFim.getText();
-        String dataFimLimpo = Formatacao.removerFormatacao(dataFim);
-        
-        if (cxNome.getText().isEmpty()) {
+
+        if (nome.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nome é obrigatório!");
             return;
         }
-        if (cxDataInicio.getText().isEmpty()) {
+        if (dataInicio.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Data de Início é obrigatória!");
             return;
         }
-        if (cxDataFim.getText().isEmpty()) {
+        if (dataFim.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Data de Fim é obrigatória!");
             return;
         }
-        
+
+        Safra s = new Safra();
+        s.setNome(nome);
+        s.setDescricao(descricao);
+        s.setDataInicio(Formatacao.ajustaDataAMD(dataInicio));
+        s.setDataFim(Formatacao.ajustaDataAMD(dataFim));
+
+        boolean retorno;
+        if (codigo > 0) {
+            s.setId(codigo);
+            retorno = cs.editar(s);
+            if (retorno) JOptionPane.showMessageDialog(null, "Editado com sucesso");
+            else JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
+            codigo = 0;
+        } else {
+            retorno = cs.salvar(s);
+            if (retorno) JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            else JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
+        }
+
         cxNome.setText("");
         cxDescricao.setText("");
         cxDataInicio.setText("");
         cxDataFim.setText("");
-        
-        boolean retorno = cs.salvar(s);
-        
-        if (retorno) {
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-            cxNome.setText("");
-            cxDescricao.setText("");
-            cxDataInicio.setText("");
-            cxDataFim.setText("");
-            cxNome.requestFocus();
-        } else {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
-        }
-        
-     
+        cxNome.requestFocus();
         montaTabela();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -320,13 +313,12 @@ public class CadastroSafra extends javax.swing.JInternalFrame {
         Safra s = cs.recuperarUm(id);
         if (s != null) {
             codigo = s.getId();
-
-            cxNome.setText(s.getNome());
-            cxDescricao.setText(s.getDescricao());
-            cxDataInicio.setText(s.getDataInicio());
-            cxDataFim.setText(s.getDataFim());
             
             tabela.setSelectedIndex(0);
+            cxNome.setText(s.getNome());
+            cxDescricao.setText(s.getDescricao());
+            cxDataInicio.setText(Formatacao.ajustaDataDMA(s.getDataInicio()));
+            cxDataFim.setText(Formatacao.ajustaDataDMA(s.getDataFim()));
             
         } else {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao editar!");

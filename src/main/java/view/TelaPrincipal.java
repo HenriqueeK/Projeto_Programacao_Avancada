@@ -41,11 +41,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cadastroProduto = new javax.swing.JMenuItem();
-        cadastroSafra = new javax.swing.JMenuItem();
         cadastroCliente = new javax.swing.JMenuItem();
+        cadastroSafra = new javax.swing.JMenuItem();
         cadastroProducao = new javax.swing.JMenuItem();
-        cadastroCusto = new javax.swing.JMenuItem();
         cadastroTipoProduto = new javax.swing.JMenuItem();
+        cadastroCusto = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem3.setSelected(true);
         jCheckBoxMenuItem3.setText("jCheckBoxMenuItem3");
@@ -78,25 +78,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastroProduto.addActionListener(this::cadastroProdutoActionPerformed);
         jMenu1.add(cadastroProduto);
 
-        cadastroSafra.setText("Cadastro de Safra");
-        cadastroSafra.addActionListener(this::cadastroSafraActionPerformed);
-        jMenu1.add(cadastroSafra);
-
         cadastroCliente.setText("Cadastro Cliente");
         cadastroCliente.addActionListener(this::cadastroClienteActionPerformed);
         jMenu1.add(cadastroCliente);
+
+        cadastroSafra.setText("Cadastro de Safra");
+        cadastroSafra.addActionListener(this::cadastroSafraActionPerformed);
+        jMenu1.add(cadastroSafra);
 
         cadastroProducao.setText("Cadastro de Produção");
         cadastroProducao.addActionListener(this::cadastroProducaoActionPerformed);
         jMenu1.add(cadastroProducao);
 
-        cadastroCusto.setText("Cadastro de Custo");
-        cadastroCusto.addActionListener(this::cadastroCustoActionPerformed);
-        jMenu1.add(cadastroCusto);
-
         cadastroTipoProduto.setText("Cadastro Tipo de Produto");
         cadastroTipoProduto.addActionListener(this::cadastroTipoProdutoActionPerformed);
         jMenu1.add(cadastroTipoProduto);
+
+        cadastroCusto.setText("Cadastro de Custo");
+        cadastroCusto.addActionListener(this::cadastroCustoActionPerformed);
+        jMenu1.add(cadastroCusto);
 
         jMenuBar1.add(jMenu1);
 

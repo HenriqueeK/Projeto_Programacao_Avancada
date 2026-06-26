@@ -1,0 +1,63 @@
+CREATE TABLE safra (
+    id_safra    serial not null,
+    nome        varchar(100) not null,
+    descricao   varchar(200),
+    data_inicio date not null,
+    data_fim    date not null,
+    constraint pk_safra primary key (id_safra)
+);
+
+CREATE TABLE tipo_custo (
+    id_tipo_custo serial not null,
+    descricao     varchar(200) not null,
+    preco_padrao  decimal(10,2) not null,
+    constraint pk_tipo_custo primary key (id_tipo_custo)
+);
+
+CREATE TABLE produto (
+    id_produto serial not null,
+    nome       varchar(200) not null,
+    unidade    varchar(20) not null,
+    constraint pk_produto primary key (id_produto)
+);
+
+CREATE TABLE cliente (
+    id_cliente serial not null,
+    nome       varchar(200) not null,
+    documento  varchar(18) not null,
+    telefone   varchar(11) not null,
+    endereco   varchar(200) not null,
+    constraint pk_cliente primary key (id_cliente)
+);
+
+CREATE TABLE producao (
+    id_producao    serial not null,
+    id_produto     int not null,
+    id_safra       int not null,
+    id_cliente     int not null,
+    data_inicio    date not null,
+    data_fim       date not null,
+    quantidade     decimal(10,2) not null,
+    preco_unitario decimal(10,2) not null,
+    constraint pk_producao primary key (id_producao),
+    constraint fk_producao_produto foreign key (id_produto) references produto(id_produto),
+    constraint fk_producao_safra   foreign key (id_safra)   references safra(id_safra),
+    constraint fk_custo_cliente    foreign key (id_cliente) references cliente(id_cliente)
+);
+
+CREATE TABLE custo (
+    id_custo      serial not null,
+    id_producao   int not null,
+    id_tipo_custo int not null,
+    valor         decimal(10,2) not null,
+    constraint pk_custo          primary key (id_custo),
+    constraint fk_custo_producao foreign key (id_producao)   references producao(id_producao),
+    constraint fk_custo_tipo     foreign key (id_tipo_custo) references tipo_custo(id_tipo_custo)
+);
+
+CREATE TABLE usuario (
+    id_usuario serial not null,
+    usuario    varchar(200),
+    senha      varchar(200),
+    constraint usuario_pkey primary key (id_usuario)
+);

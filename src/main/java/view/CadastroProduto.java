@@ -254,34 +254,35 @@ private void montaTabela() {
         String nome = cxNome.getText();
         String unidade = cxUnidade.getText();
 
-        Produto p = new Produto();
-        p.setNome(nome);
-        p.setUnidade(unidade);
-        
-        if (cxNome.getText().isEmpty()) {
+        if (nome.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nome é obrigatório!");
             return;
         }
-        
-        if (cxUnidade.getText().isEmpty()) {
+        if (unidade.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Unidade é obrigatória!");
             return;
         }
-        
+
+        Produto p = new Produto();
+        p.setNome(nome);
+        p.setUnidade(unidade);
+
+        boolean retorno;
+        if (codigo > 0) {
+            p.setId(codigo);
+            retorno = cp.editar(p);
+            if (retorno) JOptionPane.showMessageDialog(null, "Editado com sucesso");
+            else JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs do sistema.");
+            codigo = 0;
+        } else {
+            retorno = cp.salvar(p);
+            if (retorno) JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            else JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs do sistema.");
+        }
+
         cxNome.setText("");
         cxUnidade.setText("");
-        boolean retorno = cp.salvar(p);
-
-        
-        if (retorno) {
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-            cxNome.setText("");
-            cxUnidade.setText("");
-            cxNome.requestFocus();
-        } else {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs do sistema.");
-        }
-        
+        cxNome.requestFocus();
         montaTabela();
 
     }//GEN-LAST:event_bntSalvarActionPerformed

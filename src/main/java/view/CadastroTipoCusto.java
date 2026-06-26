@@ -221,50 +221,44 @@ public class CadastroTipoCusto extends javax.swing.JInternalFrame {
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         String descricao = cxDescricao.getText();
         String precoPadrao = cxPrecoPadrao.getText();
-        
+
+        if (descricao.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Descrição é obrigatória!");
+            return;
+        }
+        if (precoPadrao.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preço Padrão é obrigatório!");
+            return;
+        }
+
         TipoCusto t = new TipoCusto();
         t.setDescricao(descricao);
         t.setPrecoPadrao(Double.parseDouble(precoPadrao));
 
-        cxDescricao.setText("");
-        cxPrecoPadrao.setText("");
-        
         boolean retorno = false;
-        
-        if (cxDescricao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Descrição é obrigatória!");
-            return;
-        }
-        if (cxPrecoPadrao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Preço Padrão é obrigatório!");
-            return;
-        }
-        
+
         if (codigo == 0) {
             retorno = ct.salvar(t);
         } else {
             t.setId(codigo);
             retorno = ct.editar(t);
         }
-        
+
         if (retorno) {
-            
             if (codigo == 0) {
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso");
             } else {
                 codigo = 0;
                 JOptionPane.showMessageDialog(null, "Editado com sucesso");
             }
-            
             cxDescricao.setText("");
             cxPrecoPadrao.setText("");
-
             cxDescricao.requestFocus();
             montaTabela();
         } else {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro, verifique os logs.");
         }
-        
+
         montaTabela();
     }//GEN-LAST:event_bntSalvarActionPerformed
 

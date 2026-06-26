@@ -1,5 +1,4 @@
 model/ProdutoTest.class
-apoio/ConexaoBDTest.class
 model/CustoTest.class
 entidades/DAO/ClienteDAOTest.class
 entidades/DAO/ProdutoDAOTest.class

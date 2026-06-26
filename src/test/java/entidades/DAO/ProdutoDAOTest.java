@@ -21,7 +21,7 @@ public class ProdutoDAOTest {
             "  unidade     VARCHAR(20)  NOT NULL " +
             ");";
 
-    private static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS produto CASCADE;";
+    private static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS produto;";
 
     private ProdutoDAO dao;
 
@@ -49,7 +49,7 @@ public class ProdutoDAOTest {
         ConexaoBD.getInstance().shutdown();
         dao = new ProdutoDAO();
         try {
-            ConexaoBD.executeUpdate("TRUNCATE TABLE produto RESTART IDENTITY CASCADE;");
+            ConexaoBD.executeUpdate("TRUNCATE TABLE produto RESTART IDENTITY;");
         } catch (SQLException e) {
             throw new RuntimeException("Erro em @Before: falha ao truncar tabela 'produto'.\n" + e.getMessage(), e);
         }

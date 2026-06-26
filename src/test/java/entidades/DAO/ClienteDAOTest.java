@@ -26,7 +26,7 @@ public class ClienteDAOTest {
             "  endereco    VARCHAR(200) NOT NULL " +
             ");";
 
-    private static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS cliente CASCADE;";
+    private static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS cliente;";
 
     private ClienteDAO dao;
 
@@ -54,7 +54,7 @@ public class ClienteDAOTest {
         ConexaoBD.getInstance().shutdown();
         dao = new ClienteDAO();
         try {
-            ConexaoBD.executeUpdate("TRUNCATE TABLE cliente RESTART IDENTITY CASCADE;");
+            ConexaoBD.executeUpdate("TRUNCATE TABLE cliente RESTART IDENTITY;");
         } catch (SQLException e) {
             throw new RuntimeException("Erro em @Before: falha ao truncar tabela 'cliente'.\n" + e.getMessage(), e);
         }
